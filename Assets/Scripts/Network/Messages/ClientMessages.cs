@@ -10,6 +10,8 @@ public class ClientMessages : MonoBehaviour
         StartGame,
         Ready,
         Inputs,
+        Shoot,
+        ShootEnemy,
     }
 
     private static NetworkManager _networkManager;
@@ -55,6 +57,23 @@ public class ClientMessages : MonoBehaviour
         message.AddFloat(velocityZ);
         message.AddFloat(velocityX);
         message.AddVector3(aimPos);
+        _networkManager.GetClient().Send(message);
+    }
+
+    public void SendShoot(Vector3 pos, Vector3 dir)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.Shoot);
+        message.AddVector3(pos);
+        message.AddVector3(dir);
+        _networkManager.GetClient().Send(message);
+    }
+    
+    public void SendShootEnemy(int id, Vector3 pos, Vector3 dir)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.Shoot);
+        message.AddInt(id);
+        message.AddVector3(pos);
+        message.AddVector3(dir);
         _networkManager.GetClient().Send(message);
     }
     #endregion
@@ -125,6 +144,34 @@ public class ClientMessages : MonoBehaviour
                 playerIdentity.PlayerAimController.SetTargetPos(aimPos);
             }
         }
+    }
+
+    [MessageHandler((ushort)ServerMessages.MessagesId.ClientShoot)]
+    private static void OnServerClientShoot(Message message)
+    {
+        ushort id = message.GetUShort();
+        Vector3 pos = message.GetVector3();
+        Vector3 dir = message.GetVector3();
+
+        foreach (var player in _networkManager.GetPlayers())
+        {
+            if (player.Value == null) return;
+
+            if (id == player.Key)
+            {
+                PlayerGameIdentity playerGameIdentity = (PlayerGameIdentity)player.Value;
+                playerGameIdentity.PlayerDistantFiringController.ShootFx(pos, dir);
+            }
+        }
+    }
+
+    [MessageHandler((ushort)ServerMessages.MessagesId.SpawnEnemy)]
+    private static void OnServerSpawnEnemy(Message message)
+    {
+        int id = message.GetInt();
+        int spawnIndex = message.GetInt();
+        
+        EnemyDistantSpawnManager.Instance.SpawnEnemy(id, spawnIndex);
     }
     #endregion
 }

@@ -12,7 +12,6 @@ public class LineLaserController : MonoBehaviour
 
     private void Update()
     {
-
         if (Physics.Raycast(transform.position, transform.forward,out RaycastHit hit, Mathf.Infinity))
         {
             _lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance) );

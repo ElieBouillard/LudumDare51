@@ -11,6 +11,9 @@ public class ServerMessages : MonoBehaviour
         StartGame,
         InitializeGameplay,
         PlayerInputs,
+        ClientShoot,
+        ClientShootEnemy,
+        SpawnEnemy,
     }
 
     private static NetworkManager _networkManager;
@@ -74,6 +77,23 @@ public class ServerMessages : MonoBehaviour
         message.AddVector3(aimPos);
         _networkManager.GetServer().SendToAll(message, id);
     }
+
+    private static void SendClientShoot(ushort id, Vector3 pos, Vector3 dir)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.ClientShoot);
+        message.AddUShort(id);
+        message.AddVector3(pos);
+        message.AddVector3(dir);
+        _networkManager.GetServer().SendToAll(message, id);
+    }
+
+    public void SendSpawnEnemy(int id, int spawnIndex)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.SpawnEnemy);
+        message.AddInt(id);
+        message.AddInt(spawnIndex);
+        _networkManager.GetServer().SendToAll(message, _networkManager.GetClient().Id);
+    }
     #endregion
 
     #region Received
@@ -106,6 +126,18 @@ public class ServerMessages : MonoBehaviour
     private static void OnClientInputs(ushort id, Message message)
     {
         SendClientInputs(id,message.GetVector3(), message.GetQuaternion(), message.GetFloat(), message.GetFloat(), message.GetVector3());
+    }
+
+    [MessageHandler((ushort)ClientMessages.MessagesId.Shoot)]
+    private static void OnClientShoot(ushort id, Message message)
+    {
+        SendClientShoot(id, message.GetVector3(), message.GetVector3());   
+    }
+    
+    [MessageHandler((ushort)ClientMessages.MessagesId.ShootEnemy)]
+    private static void OnClientShootEnemy(ushort id, Message message)
+    {
+        SendClientShoot(id, message.GetVector3(), message.GetVector3());   
     }
     #endregion
 }

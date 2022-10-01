@@ -465,6 +465,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4399759002719680570}
     m_Modifications:
+    - target: {fileID: 3587409063797316045, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
+        type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3988584148301170634, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
         type: 3}
       propertyPath: m_RootOrder
