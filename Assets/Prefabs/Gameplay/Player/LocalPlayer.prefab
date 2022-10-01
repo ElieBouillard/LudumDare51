@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3362092204290886289}
   - component: {fileID: 1893901260788476182}
   - component: {fileID: 8853002466213915102}
+  - component: {fileID: 342972357980022960}
   m_Layer: 6
   m_Name: LocalPlayer
   m_TagString: Untagged
@@ -50,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5c9cc38c53b74d9a8f5aca862775f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerInputReceiver: {fileID: 0}
+  PlayerAimController: {fileID: 8061928366659549627}
 --- !u!114 &8474493308027158913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +144,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &342972357980022960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399759002719680571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87afac9a86f0bf84384162fc71ce9124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimTransform: {fileID: 4620768737225711337}
 --- !u!1001 &4620768736727652327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,8 +233,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerMesh
       objectReference: {fileID: 0}
+    - target: {fileID: 8588274414671929454, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
+        type: 3}
+      propertyPath: _isLocal
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33c9b00218d6a7a4a8a400e5cb0a1053, type: 3}
+--- !u!4 &4620768737225711337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1718634766, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
+    type: 3}
+  m_PrefabInstance: {fileID: 4620768736727652327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4620768737225711338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1718634765, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
@@ -237,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d251b7f886306140a5f5e268594b792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _islocal: 1
 --- !u!4 &8609203024891416621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3988584148301170634, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,

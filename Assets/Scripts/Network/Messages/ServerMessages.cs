@@ -10,8 +10,16 @@ public class ServerMessages : MonoBehaviour
         StartGame,
         InitializeGameplay,
         PlayerDisconnectedFromGame,
+        PlayerInputs,
     }
 
+    private static NetworkManager _networkManager;
+
+    private void Awake()
+    {
+        _networkManager = NetworkManager.Instance;
+    }
+    
     #region Send
     public static void SendPlayerConnectedToLobby(ushort newPlayerId, ulong steamId)
     {
@@ -20,32 +28,44 @@ public class ServerMessages : MonoBehaviour
             Message message1 = Message.Create(MessageSendMode.reliable, MessagesId.PlayerConnectedToLobby);
             message1.AddUShort(player.Value.GetId());
             message1.AddULong(player.Value.GetSteamId());
-            NetworkManager.Instance.GetServer().Send(message1, newPlayerId);
+            _networkManager.GetServer().Send(message1, newPlayerId);
         }
         
         Message message2 = Message.Create(MessageSendMode.reliable, MessagesId.PlayerConnectedToLobby);
         message2.AddUShort(newPlayerId);
         message2.AddULong(steamId);
-        NetworkManager.Instance.GetServer().SendToAll(message2);
+        _networkManager.GetServer().SendToAll(message2);
     }
     
     public void SendPlayerDisconnected(ushort playerId)
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.PlayerDisconnected);
         message.AddUShort(playerId);
-        NetworkManager.Instance.GetServer().SendToAll(message, playerId);
+        _networkManager.GetServer().SendToAll(message, playerId);
     }
 
     private static void SendHostStartGame()
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.StartGame);
-        NetworkManager.Instance.GetServer().SendToAll(message);
+        _networkManager.GetServer().SendToAll(message);
     }
 
     private static void SendInitializeClient(ushort id)
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.InitializeGameplay);
-        NetworkManager.Instance.GetServer().Send(message, id);
+        _networkManager.GetServer().Send(message, id);
+    }
+
+    private static void SendClientInputs(ushort id, Vector3 pos, Quaternion rot, float velocityZ, float velocityX, Vector3 aimPos)
+    {
+        Message message = Message.Create(MessageSendMode.unreliable, MessagesId.PlayerInputs);
+        message.AddUShort(id);
+        message.AddVector3(pos);
+        message.AddQuaternion(rot);
+        message.AddFloat(velocityZ);
+        message.AddFloat(velocityX);
+        message.AddVector3(aimPos);
+        _networkManager.GetServer().SendToAll(message, id);
     }
     #endregion
 
@@ -67,6 +87,12 @@ public class ServerMessages : MonoBehaviour
     private static void OnClientReady(ushort id, Message message)
     {
         SendInitializeClient(id);
+    }
+    
+    [MessageHandler((ushort) ClientMessages.MessagesId.Inputs)]
+    private static void OnClientInputs(ushort id, Message message)
+    {
+        SendClientInputs(id,message.GetVector3(), message.GetQuaternion(), message.GetFloat(), message.GetFloat(), message.GetVector3());
     }
     #endregion
 }
