@@ -1915,6 +1915,8 @@ GameObject:
   - component: {fileID: 7042047559866719664}
   - component: {fileID: 732349948}
   - component: {fileID: 732349949}
+  - component: {fileID: 8588274414671929454}
+  - component: {fileID: 8564262092807134072}
   m_Layer: 6
   m_Name: PlayerMesh
   m_TagString: Untagged
@@ -2071,6 +2073,35 @@ MonoBehaviour:
   - {fileID: 4080758451022661213}
   - {fileID: 1777031674655192713}
   - {fileID: 6878295485418886699}
+--- !u!114 &8588274414671929454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328412833911840112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604d2b3c69f055544b0ea443449ed1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8564262092807134072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328412833911840112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5f139984e03294e9ec885413d804be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floorMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _smoothForce: 25
+  _yRotationOffset: 0
 --- !u!1 &4521222197372225876
 GameObject:
   m_ObjectHideFlags: 0
