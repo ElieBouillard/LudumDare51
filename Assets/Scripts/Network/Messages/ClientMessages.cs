@@ -70,7 +70,7 @@ public class ClientMessages : MonoBehaviour
     
     public void SendShootEnemy(int id, Vector3 pos, Vector3 dir)
     {
-        Message message = Message.Create(MessageSendMode.reliable, MessagesId.Shoot);
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.ShootEnemy);
         message.AddInt(id);
         message.AddVector3(pos);
         message.AddVector3(dir);
@@ -165,13 +165,33 @@ public class ClientMessages : MonoBehaviour
         }
     }
 
+    [MessageHandler((ushort)ServerMessages.MessagesId.ClientShootEnemy)]
+    private static void OnServerClientShootEnemy(Message message)
+    {
+        ushort id = message.GetUShort();
+        int enemyId = message.GetInt();
+        Vector3 pos = message.GetVector3();
+        Vector3 dir = message.GetVector3();
+
+        foreach (var player in _networkManager.GetPlayers())
+        {
+            if (player.Value == null) return;
+
+            if (id == player.Key)
+            {
+                PlayerGameIdentity playerGameIdentity = (PlayerGameIdentity)player.Value;
+                playerGameIdentity.PlayerDistantFiringController.ShootEnemy(enemyId,pos, dir);
+            }
+        }
+    }
+
     [MessageHandler((ushort)ServerMessages.MessagesId.SpawnEnemy)]
     private static void OnServerSpawnEnemy(Message message)
     {
         int id = message.GetInt();
         int spawnIndex = message.GetInt();
         
-        EnemyDistantSpawnManager.Instance.SpawnEnemy(id, spawnIndex);
+        EnemySpawnManager.Instance.ServerSpawnEnemy(id, spawnIndex);
     }
     #endregion
 }

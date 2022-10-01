@@ -87,6 +87,16 @@ public class ServerMessages : MonoBehaviour
         _networkManager.GetServer().SendToAll(message, id);
     }
 
+    private static void SendClientShootEnemy(ushort id, int enemyId, Vector3 pos, Vector3 dir)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.ClientShootEnemy);
+        message.AddUShort(id);
+        message.AddInt(enemyId);
+        message.AddVector3(pos);
+        message.AddVector3(dir);
+        _networkManager.GetServer().SendToAll(message, id);
+    }
+    
     public void SendSpawnEnemy(int id, int spawnIndex)
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.SpawnEnemy);
@@ -137,7 +147,7 @@ public class ServerMessages : MonoBehaviour
     [MessageHandler((ushort)ClientMessages.MessagesId.ShootEnemy)]
     private static void OnClientShootEnemy(ushort id, Message message)
     {
-        SendClientShoot(id, message.GetVector3(), message.GetVector3());   
+        SendClientShootEnemy(id,message.GetInt(), message.GetVector3(), message.GetVector3());   
     }
     #endregion
 }

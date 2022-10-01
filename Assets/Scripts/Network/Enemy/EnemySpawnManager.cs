@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyServerSpawnManager : MonoBehaviour
+public class EnemySpawnManager : Singleton<EnemySpawnManager>
 {
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private EnemyGameIdentity _enemyPrefab;
@@ -19,14 +19,19 @@ public class EnemyServerSpawnManager : MonoBehaviour
     private float _initialTimer;
     private float _currTimer;
 
-    private void Awake()
+    public List<EnemyGameIdentity> GetEnemies() => _enemies;
+
+    protected override void Awake()
     {
+        base.Awake();
+        
         _networkManager = NetworkManager.Instance;
-        enabled = _networkManager.GetServer().IsRunning;
     }
 
     private void Update()
     {
+        if (!_networkManager.GetServer().IsRunning) return;
+        
         _currTimer += Time.deltaTime;
 
         if (_currTimer > 10f)
@@ -36,7 +41,6 @@ public class EnemyServerSpawnManager : MonoBehaviour
         }
     }
     
-    [ContextMenu("spawn")]
     private void Spawn()
     {
         List<int> _spawnAvaible = new List<int>();
@@ -53,15 +57,21 @@ public class EnemyServerSpawnManager : MonoBehaviour
             Vector3 pos = _spawnPoints[_spawnAvaible[randIndex]].position;
 
             EnemyGameIdentity enemy = Instantiate(_enemyPrefab, pos, Quaternion.identity);
-
             
             _enemies.Add(enemy);
             
-            enemy.SetId(_enemies.Count - 1);
+            enemy.SetId(Random.Range(0,999999999));
             
             _networkManager.GetServerMessages().SendSpawnEnemy(enemy.GetId(), _spawnAvaible[randIndex]);
             
             _spawnAvaible.RemoveAt(randIndex);
         }
+    }
+
+    public void ServerSpawnEnemy(int id, int spawnIndex)
+    {
+        EnemyGameIdentity enemy = Instantiate(_enemyPrefab, _spawnPoints[spawnIndex].position, Quaternion.identity);
+        enemy.SetId(id);
+        _enemies.Add(enemy);
     }
 }

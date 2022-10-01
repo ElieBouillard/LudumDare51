@@ -7,15 +7,26 @@ public class PlayerDistantFiringController : MonoBehaviour
 {
     [SerializeField] private VisualEffect _muzzleFlash;
     [SerializeField] private GameObject _impactPrefab;
-
-    public void ShootEnemy(EnemyGameIdentity enemy, Vector3 pos, Vector3 dir)
+    [SerializeField] private int _damage;
+    
+    
+    public void ShootEnemy(int id, Vector3 pos, Vector3 dir)
     {
+        foreach (var enemy in EnemySpawnManager.Instance.GetEnemies())
+        {
+            if (enemy.GetId() == id)
+            {
+                enemy.TakeDamage(_damage);
+                return;
+            }
+        }
+        
         ShootFx(pos, dir);
     }
 
     public void ShootFx(Vector3 pos,Vector3 dir)
     {
-        _muzzleFlash.Play();
+        // _muzzleFlash.Play();
         GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;
         Destroy(impactTemp, 2f);

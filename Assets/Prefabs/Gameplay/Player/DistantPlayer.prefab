@@ -77,6 +77,7 @@ MonoBehaviour:
   _muzzleFlash: {fileID: 8208176623514947114}
   _impactPrefab: {fileID: 1879272669879180, guid: 7bef351ddc33ae044b671a7664396a20,
     type: 3}
+  _damage: 10
 --- !u!1001 &4620768736727652327
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,14 +45,14 @@ public class PlayerLocalFiringController : MonoBehaviour
 
         enemy.TakeDamage(_damage);
         
-        // NetworkManager.Instance.GetClientMessages()
+        NetworkManager.Instance.GetClientMessages().SendShootEnemy(enemy.GetId(), pos,dir);
     }
 
     private void ShootFx(Vector3 pos, Vector3 dir)
     {       
         CameraShaker.Presets.ShortShake3D();
         
-        _muzzleFlash.Play();
+        // _muzzleFlash.Play();
         
         GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;
