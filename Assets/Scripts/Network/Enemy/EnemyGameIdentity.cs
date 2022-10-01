@@ -34,6 +34,7 @@ public class EnemyGameIdentity : MonoBehaviour
 
     private void Death()
     {
-        
+        EnemySpawnManager.Instance.GetEnemies().Remove(this);
+        Destroy(gameObject);
     }
 }

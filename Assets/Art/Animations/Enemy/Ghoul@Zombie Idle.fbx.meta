@@ -1,31 +1,16 @@
 fileFormatVersion: 2
-guid: 21d173363b3f15f4ea799e0ea08e4389
+guid: 6dc1376947b076b4b8520614e5657921
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Emissive_Red_01
-    second: {fileID: 2100000, guid: ac5bf6441f3a9b84eb1c2fb6950f6fee, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Ghoul_01
-    second: {fileID: 2100000, guid: 6c08173b5c7f8d648b1c5bdee0e17249, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Hair_Strand_01
-    second: {fileID: 2100000, guid: cdefba5b446a17447b7befc2e139cb0e, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
-    materialName: 1
-    materialSearch: 2
+    materialName: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
