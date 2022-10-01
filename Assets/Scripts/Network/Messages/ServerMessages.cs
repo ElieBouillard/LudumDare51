@@ -5,11 +5,11 @@ public class ServerMessages : MonoBehaviour
 {
     internal enum MessagesId : ushort
     {
-        PlayerConnectedToLobby = 1,
+        Ping = 1,
+        PlayerConnectedToLobby,
         PlayerDisconnected,
         StartGame,
         InitializeGameplay,
-        PlayerDisconnectedFromGame,
         PlayerInputs,
     }
 
@@ -21,6 +21,13 @@ public class ServerMessages : MonoBehaviour
     }
     
     #region Send
+    private static void SendPlayerPing(ushort id, float time)
+    {
+        Message message = Message.Create(MessageSendMode.unreliable, MessagesId.Ping);
+        message.AddFloat(time);
+        _networkManager.GetServer().Send(message, id);
+    }
+    
     public static void SendPlayerConnectedToLobby(ushort newPlayerId, ulong steamId)
     {
         foreach (var player in NetworkManager.Instance.GetPlayers())
@@ -70,6 +77,12 @@ public class ServerMessages : MonoBehaviour
     #endregion
 
     #region Received
+    [MessageHandler((ushort)ClientMessages.MessagesId.Ping)]
+    private static void OnClientPing(ushort id, Message message)
+    {
+        SendPlayerPing(id, message.GetFloat());
+    }
+    
     [MessageHandler((ushort) ClientMessages.MessagesId.ClientConnected)]
     private static void OnClientConnected(ushort id, Message message)
     {

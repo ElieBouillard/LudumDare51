@@ -1,5 +1,3 @@
-using System;
-using System.Net.NetworkInformation;
 using RiptideNetworking;
 using UnityEngine;
 
@@ -7,7 +5,8 @@ public class ClientMessages : MonoBehaviour
 {
     internal enum MessagesId : ushort
     {
-        ClientConnected = 1,
+        Ping = 1,
+        ClientConnected,
         StartGame,
         Ready,
         Inputs,
@@ -21,6 +20,14 @@ public class ClientMessages : MonoBehaviour
     }
 
     #region Send
+
+    public void SendPing(float time)
+    {
+        Message message = Message.Create(MessageSendMode.unreliable, MessagesId.Ping);
+        message.AddFloat(time);
+        _networkManager.GetClient().Send(message);
+    }
+    
     public void SendClientConnected(ulong steamId)
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.ClientConnected);
@@ -53,6 +60,14 @@ public class ClientMessages : MonoBehaviour
     #endregion
 
     #region Received
+
+    [MessageHandler((ushort)ServerMessages.MessagesId.Ping)]
+    private static void OnServerPing(Message message)
+    {
+        if (!PingSystem.Instance) return;
+        PingSystem.Instance.ReceivePing(message.GetFloat());
+    }
+    
     [MessageHandler((ushort) ServerMessages.MessagesId.PlayerConnectedToLobby)]
     private static void OnClientConnectedToLobby(Message message)
     {

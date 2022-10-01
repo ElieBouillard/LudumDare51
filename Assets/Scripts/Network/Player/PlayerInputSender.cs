@@ -15,7 +15,7 @@ public class PlayerInputSender : MonoBehaviour
         _playerAnimation = GetComponentInChildren<PlayerAnimationController>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _networkManager.GetClientMessages().SendInputs(transform.position, transform.GetChild(0).rotation, _playerAnimation.GetVelocityZ(), _playerAnimation.GetVelocityX(), _aimTransform.position);
     }

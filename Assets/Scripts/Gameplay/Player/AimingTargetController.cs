@@ -28,6 +28,6 @@ public class AimingTargetController : MonoBehaviour
             }
         }
 
-        transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 20f);
+        transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 100f);
     }
 }
