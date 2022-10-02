@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineTransform: {fileID: 4620768737120536318}
-  _muzzleFlash: {fileID: 8208176623514947114}
+  _muzzleFlash: {fileID: 1169275203532295580}
   _impactPrefab: {fileID: 1879272669879180, guid: 7bef351ddc33ae044b671a7664396a20,
     type: 3}
   _damage: 10
@@ -309,6 +309,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33c9b00218d6a7a4a8a400e5cb0a1053, type: 3}
+--- !u!2083052967 &1169275203532295580 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 5772028355093650043, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
+    type: 3}
+  m_PrefabInstance: {fileID: 4620768736727652327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4620768737120536318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 413995289, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
@@ -340,12 +346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _islocal: 1
---- !u!2083052967 &8208176623514947114 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 3587409063797316045, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
-    type: 3}
-  m_PrefabInstance: {fileID: 4620768736727652327}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8609203024891416621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3988584148301170634, guid: 33c9b00218d6a7a4a8a400e5cb0a1053,
