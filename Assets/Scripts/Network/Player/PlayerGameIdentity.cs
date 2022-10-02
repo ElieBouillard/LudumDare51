@@ -61,7 +61,7 @@ public class PlayerGameIdentity : PlayerIdentity
         if (isRevive)
         {
             CameraController.Instance.SetTarget(transform);
-            transform.position = Vector3.zero;
+            transform.position = GameManager.Instance.GetSpawnPoint().position;
 
             _currHealth = _initialHealth;
             HealthBarManager.Instance.SetHealthBarValue((float)_currHealth /(float)_initialHealth);
@@ -82,5 +82,10 @@ public class PlayerGameIdentity : PlayerIdentity
     public void DistantEnable(bool isRevive)
     {
         _line.enabled = isRevive;
+    }
+
+    public void LookForSpectate()
+    {
+        
     }
 }   

@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _localPlayerPrefab;
     [SerializeField] private GameObject _otherPlayerPrefab;
 
+    public Transform GetSpawnPoint() => _spawnPoints[0];
+    
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
