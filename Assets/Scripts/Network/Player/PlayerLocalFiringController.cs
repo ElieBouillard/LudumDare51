@@ -52,7 +52,7 @@ public class PlayerLocalFiringController : MonoBehaviour
     {       
         CameraShaker.Presets.ShortShake3D();
         
-        // _muzzleFlash.Play();
+        _muzzleFlash.Play();
         
         GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;

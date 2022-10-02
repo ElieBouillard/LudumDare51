@@ -26,7 +26,7 @@ public class PlayerDistantFiringController : MonoBehaviour
 
     public void ShootFx(Vector3 pos,Vector3 dir)
     {
-        // _muzzleFlash.Play();
+        _muzzleFlash.Play();
         GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;
         Destroy(impactTemp, 2f);
