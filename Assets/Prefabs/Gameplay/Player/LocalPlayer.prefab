@@ -55,6 +55,8 @@ MonoBehaviour:
   PlayerInputReceiver: {fileID: 0}
   PlayerAimController: {fileID: 0}
   PlayerDistantFiringController: {fileID: 0}
+  _initialHealth: 100
+  _healthBar: {fileID: 0}
 --- !u!114 &8474493308027158913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +177,12 @@ MonoBehaviour:
   _muzzleFlash: {fileID: 5701985776377986671}
   _impactPrefab: {fileID: 1879272669879180, guid: 7bef351ddc33ae044b671a7664396a20,
     type: 3}
+  _impactBloodPrefab: {fileID: 8773490005194726063, guid: 208c34201f5b18544ad861cb88a7890e,
+    type: 3}
   _damage: 10
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 63
 --- !u!1001 &2824635425727524608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,6 +255,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7499226952087097709, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499226952087097709, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499226952087097709, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7499226952518328664, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
         type: 3}
       propertyPath: m_IsActive
@@ -286,6 +308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _islocal: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 63
 --- !u!2083052967 &5701985776377986671 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 7499226952087097711, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,

@@ -6,16 +6,11 @@ using UnityEngine;
 public class AimingTargetController : MonoBehaviour
 {
     [SerializeField] private bool _islocal;
-    
-    private int _layerMask;
+    [SerializeField] private LayerMask _layerMask;
 
     private Vector3 _targetPos;
 
     public void SetTargetPos(Vector3 pos) => _targetPos = pos;
-    private void Awake()
-    {
-        _layerMask =~ LayerMask.GetMask("Player");
-    }
 
     private void Update()
     {

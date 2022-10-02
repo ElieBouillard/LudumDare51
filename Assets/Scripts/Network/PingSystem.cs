@@ -45,6 +45,6 @@ public class PingSystem : Singleton<PingSystem>
 
         pingSmooth /= _pingBuffer.Count;
 
-        _pingText.text = $"Ping : {pingSmooth}";
+        _pingText.text = $"{pingSmooth} ms";
     }
 }
