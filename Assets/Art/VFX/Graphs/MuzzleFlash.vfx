@@ -16,10 +16,10 @@ MonoBehaviour:
   - title: Muzzle Planes
     position:
       serializedVersion: 2
-      x: 356
+      x: 232
       y: -249
-      width: 1037
-      height: 1884
+      width: 1161
+      height: 1858
     contents:
     - model: {fileID: 8926484042661614555}
       id: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
   - title: Muzzle Cone
     position:
       serializedVersion: 2
-      x: 1496
+      x: 1386
       y: -242
-      width: 1037
-      height: 1898
+      width: 1147
+      height: 1938
     contents:
     - model: {fileID: 8926484042661614735}
       id: 0
@@ -78,9 +78,9 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 356
+    x: 232
     y: -249
-    width: 3116
+    width: 3240
     height: 1945
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":3.9372549057006838,"g":0.5803921818733215,"b":0.0941176488995552,"a":0.0}'
+      m_SerializableObject: '{"r":5.992156982421875,"g":0.9098039269447327,"b":0.1568627506494522,"a":0.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -1213,16 +1213,16 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614631}
       inputSlot: {fileID: 8926484042661614718}
-    position: {x: 428, y: 1347}
+    position: {x: 403, y: 1369}
     expandedSlots: []
-    expanded: 1
+    expanded: 0
   - m_Id: 1
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614631}
       inputSlot: {fileID: 8926484042661614792}
-    position: {x: 1568, y: 1354}
+    position: {x: 1564, y: 1456}
     expandedSlots: []
-    expanded: 1
+    expanded: 0
 --- !u!114 &8926484042661614631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,7 +1252,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":3.9372549057006838,"g":0.5803921818733215,"b":0.0941176488995552,"a":0.0}'
+      m_SerializableObject: '{"r":5.992156982421875,"g":0.9098039269447327,"b":0.1568627506494522,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 572, y: 1372}
+  m_UIPosition: {x: 587, y: 1337}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2471,7 +2471,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 381, y: 1442}
+  m_UIPosition: {x: 257, y: 1307}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2507,7 +2507,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.6
+      m_SerializableObject: 0.8
     m_Space: 2147483647
   m_Property:
     name: min
@@ -2541,7 +2541,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.4
+      m_SerializableObject: 1.2
     m_Space: 2147483647
   m_Property:
     name: max
@@ -4004,8 +4004,8 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1712, y: 1379}
-  m_UICollapsed: 0
+  m_UIPosition: {x: 1746, y: 1425}
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots:
   - {fileID: 8926484042661614792}
@@ -4413,7 +4413,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1521, y: 1449}
+  m_UIPosition: {x: 1411, y: 1396}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -4832,7 +4832,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1854, y: 953}
+  m_UIPosition: {x: 1877, y: 851}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
