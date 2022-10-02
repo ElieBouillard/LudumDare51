@@ -86,6 +86,13 @@ public class PlayerGameIdentity : PlayerIdentity
 
     public void LookForSpectate()
     {
-        
+        foreach (var player in NetworkManager.Instance.GetPlayers())
+        {
+            if(player.Key == GetId()) break;
+            if (!NetworkManager.Instance.GetPlayersDead().ContainsKey(player.Key))
+            {
+                CameraController.Instance.SetTarget(player.Value.transform);
+            }
+        }
     }
 }   

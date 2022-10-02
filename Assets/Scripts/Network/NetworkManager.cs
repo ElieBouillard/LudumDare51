@@ -221,11 +221,9 @@ public class NetworkManager : Singleton<NetworkManager>
         if (_playersDead.Count == _players.Count)
         {
             //SendEndGame;
-            Debug.Log("Game Over");
         }
     }
-
-    [ContextMenu("dd")]
+    
     public void DebugPlayerDeadCount()
     {
         Debug.Log(_playersDead.Count);

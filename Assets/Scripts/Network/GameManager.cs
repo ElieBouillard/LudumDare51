@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _otherPlayerPrefab;
 
     public Transform GetSpawnPoint() => _spawnPoints[0];
+
+    private bool isGameOver;
     
     private void OnEnable()
     {

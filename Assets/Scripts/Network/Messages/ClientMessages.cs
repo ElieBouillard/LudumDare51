@@ -253,6 +253,11 @@ public class ClientMessages : MonoBehaviour
                 }
             }
         }
+        // else
+        // {
+        //     PlayerGameIdentity playerIdentity = (PlayerGameIdentity) _networkManager.GetLocalPlayer();
+        //     playerIdentity.LookForSpectate();
+        // }
     }
 
     [MessageHandler((ushort) ServerMessages.MessagesId.PlayerRespawn)]
