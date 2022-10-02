@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 438379604672206111}
   - component: {fileID: 3583374884292287162}
   - component: {fileID: 1611799595071614576}
+  - component: {fileID: 4701857728727363245}
   m_Layer: 0
   m_Name: BrickRubble_01b
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &4701857728727363245
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963417656733667237}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.9222601
+  m_Center: {x: 0.5121052, y: 0, z: -1.0535402}
