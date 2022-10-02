@@ -20,7 +20,7 @@ public class PlayerLocalFiringController : MonoBehaviour
         {
             if (Physics.Raycast(_lineTransform.position, _lineTransform.forward, out RaycastHit hit, Mathf.Infinity))
             {
-                if (hit.collider.TryGetComponent(out EnemyGameIdentity enemy))
+                if (hit.collider.TryGetComponent(out EnemyServerGameIdentity enemy))
                 {
                     Shoot(enemy, hit.point, hit.normal);
                 }
@@ -36,16 +36,20 @@ public class PlayerLocalFiringController : MonoBehaviour
     {
         ShootFx(pos, dir);
         
+        GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
+        impactTemp.transform.forward = dir;
+        Destroy(impactTemp, 2f);
+        
         NetworkManager.Instance.GetClientMessages().SendShoot(pos,dir);
     }
 
-    private void Shoot(EnemyGameIdentity enemy, Vector3 pos, Vector3 dir)
+    private void Shoot(EnemyServerGameIdentity enemyServer, Vector3 pos, Vector3 dir)
     {
         ShootFx(pos, dir);
 
-        enemy.TakeDamage(_damage);
+        enemyServer.TakeDamage(_damage);
         
-        NetworkManager.Instance.GetClientMessages().SendShootEnemy(enemy.GetId(), pos,dir);
+        NetworkManager.Instance.GetClientMessages().SendShootEnemy(enemyServer.GetId(), pos,dir);
     }
 
     private void ShootFx(Vector3 pos, Vector3 dir)
@@ -53,9 +57,5 @@ public class PlayerLocalFiringController : MonoBehaviour
         CameraShaker.Presets.ShortShake3D();
         
         _muzzleFlash.Play();
-        
-        GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
-        impactTemp.transform.forward = dir;
-        Destroy(impactTemp, 2f);
     }
 }

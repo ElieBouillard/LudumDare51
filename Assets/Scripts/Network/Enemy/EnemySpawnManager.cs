@@ -3,23 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemySpawnManager : Singleton<EnemySpawnManager>
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private EnemyGameIdentity _enemyPrefab;
+    [SerializeField] private EnemyServerGameIdentity enemyServerPrefab;
     [SerializeField] private TMP_Text _timer;
     [SerializeField] private int _spawnCount;
 
     private NetworkManager _networkManager;
     
-    private List<EnemyGameIdentity> _enemies = new List<EnemyGameIdentity>();
+    private List<EnemyServerGameIdentity> _enemies = new List<EnemyServerGameIdentity>();
 
     private float _initialTimer;
     private float _currTimer;
 
-    public List<EnemyGameIdentity> GetEnemies() => _enemies;
+    public List<EnemyServerGameIdentity> GetEnemies() => _enemies;
 
     protected override void Awake()
     {
@@ -56,13 +57,13 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
             Vector3 pos = _spawnPoints[_spawnAvaible[randIndex]].position;
 
-            EnemyGameIdentity enemy = Instantiate(_enemyPrefab, pos, Quaternion.identity);
+            EnemyServerGameIdentity enemyServer = Instantiate(enemyServerPrefab, pos, Quaternion.identity);
             
-            _enemies.Add(enemy);
+            _enemies.Add(enemyServer);
             
-            enemy.SetId(Random.Range(0,999999999));
+            enemyServer.SetId(Random.Range(0,999999999));
             
-            _networkManager.GetServerMessages().SendSpawnEnemy(enemy.GetId(), _spawnAvaible[randIndex]);
+            _networkManager.GetServerMessages().SendSpawnEnemy(enemyServer.GetId(), _spawnAvaible[randIndex]);
             
             _spawnAvaible.RemoveAt(randIndex);
         }
@@ -70,8 +71,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
     public void ServerSpawnEnemy(int id, int spawnIndex)
     {
-        EnemyGameIdentity enemy = Instantiate(_enemyPrefab, _spawnPoints[spawnIndex].position, Quaternion.identity);
-        enemy.SetId(id);
-        _enemies.Add(enemy);
+        EnemyServerGameIdentity enemyServer = Instantiate(enemyServerPrefab, _spawnPoints[spawnIndex].position, Quaternion.identity);
+        enemyServer.SetId(id);
+        _enemies.Add(enemyServer);
     }
 }

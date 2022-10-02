@@ -21,7 +21,7 @@ public class PlayerDistantFiringController : MonoBehaviour
             }
         }
         
-        ShootFx(pos, dir);
+        _muzzleFlash.Play();
     }
 
     public void ShootFx(Vector3 pos,Vector3 dir)
