@@ -15,6 +15,8 @@ public class ServerMessages : MonoBehaviour
         ClientShootEnemy,
         SpawnEnemy,
         EnemyState,
+        ChangeWave,
+        RespawnPlayer,
     }
 
     private static NetworkManager _networkManager;
@@ -117,6 +119,19 @@ public class ServerMessages : MonoBehaviour
         message.AddFloat(attack);
         _networkManager.GetServer().SendToAll(message, _networkManager.GetClient().Id);
     }
+
+    public void SendChangeWave(int waveIndex)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.ChangeWave);
+        message.AddInt(waveIndex);
+        _networkManager.GetServer().SendToAll(message);
+    }
+
+    public void SendRespawn(ushort id)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.RespawnPlayer);
+        _networkManager.GetServer().Send(message, id);
+    }
     #endregion
 
     #region Received
@@ -161,6 +176,19 @@ public class ServerMessages : MonoBehaviour
     private static void OnClientShootEnemy(ushort id, Message message)
     {
         SendClientShootEnemy(id,message.GetInt(), message.GetVector3(), message.GetVector3());   
+    }
+
+    [MessageHandler((ushort) ClientMessages.MessagesId.Dead)]
+    private static void OnClientDead(ushort id, Message message)
+    {
+        foreach (var player in _networkManager.GetPlayers())
+        {
+            if (player.Key == id)
+            {
+                _networkManager.OnPlayerDead(id);
+                return;
+            }
+        }
     }
     #endregion
 }

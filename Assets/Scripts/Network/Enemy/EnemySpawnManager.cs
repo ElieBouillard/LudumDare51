@@ -1,16 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemySpawnManager : Singleton<EnemySpawnManager>
 {
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private EnemyGameIdentity enemyPrefab;
-    [SerializeField] private TMP_Text _timer;
     [SerializeField] private int _spawnCount;
 
     private NetworkManager _networkManager;
@@ -20,6 +16,9 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     private float _initialTimer;
     private float _currTimer;
 
+    private int _currWave = 0;
+
+    public int GetCurrWave() => _currWave;
     public List<EnemyGameIdentity> GetEnemies() => _enemies;
 
     protected override void Awake()
@@ -44,6 +43,11 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     
     private void Spawn()
     {
+        _currWave++;
+        _networkManager.GetServerMessages().SendChangeWave(_currWave);
+        
+        _networkManager.CheckForPlayerRespawn(_currWave);
+        
         List<int> _spawnAvaible = new List<int>();
 
         for (int i = 0; i < _spawnPoints.Length; i++)

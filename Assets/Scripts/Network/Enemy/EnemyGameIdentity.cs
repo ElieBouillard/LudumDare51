@@ -210,7 +210,7 @@ public class EnemyGameIdentity : MonoBehaviour
         {
             if (playersHit[i].IsLocalPlayer())
             {
-                playersHit[i].TakeDamage(20);
+                playersHit[i].TakeDamage(50);
             }
         }
     }

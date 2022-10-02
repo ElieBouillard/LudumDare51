@@ -107,8 +107,10 @@
 			HandleJumpKeyInput();
 
 			
-			if (Input.GetKeyDown(KeyCode.LeftShift))
+			if (Input.GetKey(KeyCode.LeftShift) && savedVelocity != Vector3.zero)
 			{
+				if (isSpriting) return;
+				
 				isSpriting = true;
 				_animator.SetBool("Run", true);
 				_rig1.weight = 0;
@@ -116,9 +118,11 @@
 				_rotationController.enabled = false;
 				_turnToward.enabled = true;
 			}
-			
-			if (Input.GetKeyUp(KeyCode.LeftShift))
+
+			if (!Input.GetKey(KeyCode.LeftShift) || savedVelocity == Vector3.zero)
 			{
+				if (!isSpriting) return;
+				
 				isSpriting = false;
 				_animator.SetBool("Run", false);
 				_rig1.weight = 1;
@@ -126,6 +130,16 @@
 				_rotationController.enabled = true;
 				_turnToward.enabled = false;
 			}
+			
+			// if (Input.GetKeyUp(KeyCode.LeftShift))
+			// {
+			// 	isSpriting = false;
+			// 	_animator.SetBool("Run", false);
+			// 	_rig1.weight = 1;
+			// 	_rig2.weight = 1;
+			// 	_rotationController.enabled = true;
+			// 	_turnToward.enabled = false;
+			// }
 		}
 
         //Handle jump booleans for later use in FixedUpdate;

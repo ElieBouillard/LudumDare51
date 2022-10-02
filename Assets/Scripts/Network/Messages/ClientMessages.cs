@@ -12,6 +12,7 @@ public class ClientMessages : MonoBehaviour
         Inputs,
         Shoot,
         ShootEnemy,
+        Dead
     }
 
     private static NetworkManager _networkManager;
@@ -75,6 +76,12 @@ public class ClientMessages : MonoBehaviour
         message.AddInt(id);
         message.AddVector3(pos);
         message.AddVector3(dir);
+        _networkManager.GetClient().Send(message);
+    }
+
+    public void SendOnDead()
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.Dead);
         _networkManager.GetClient().Send(message);
     }
     #endregion
@@ -213,6 +220,19 @@ public class ClientMessages : MonoBehaviour
                 return;
             }
         }
+    }
+
+    [MessageHandler((ushort) ServerMessages.MessagesId.ChangeWave)]
+    private static void OnServerChangeWave(Message message)
+    {
+        WaveDisplay.Instance.ChangeWave(message.GetInt());
+    }
+
+    [MessageHandler((ushort) ServerMessages.MessagesId.RespawnPlayer)]
+    private static void OnServerRespawn(Message message)
+    {
+        PlayerGameIdentity playerGameIdentity = (PlayerGameIdentity) _networkManager.GetLocalPlayer();
+        playerGameIdentity.Revive();
     }
     #endregion
 }

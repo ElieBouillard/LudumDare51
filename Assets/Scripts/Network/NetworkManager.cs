@@ -25,6 +25,7 @@ public class NetworkManager : Singleton<NetworkManager>
     private PlayerIdentity  _localPlayer;
     private ClientMessages _clientMessages;
     private ServerMessages _serverMessages;
+    private Dictionary<ushort, int> _playersDead = new Dictionary<ushort, int>();
     #endregion
 
     #region Getters
@@ -207,12 +208,39 @@ public class NetworkManager : Singleton<NetworkManager>
     public void OnServerStartGame()
     {
         _gameState = GameState.Gameplay;
-        SceneManager.LoadScene("Enviro", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
     }
     #endregion
 
     #region Server
-    
+    public void OnPlayerDead(ushort playerId)
+    {
+        _playersDead.Add(playerId, EnemySpawnManager.Instance.GetCurrWave());
+
+        if (_playersDead.Count == _players.Count)
+        {
+            //SendEndGame;
+            Debug.Log("Game Over");
+        }
+    }
+
+    public void CheckForPlayerRespawn(int waveIndex)
+    {
+        List<ushort> playerToRespawn = new List<ushort>();
+        foreach (var player     in _playersDead)
+        {
+            if (player.Value + 3 == waveIndex)
+            {
+                _serverMessages.SendRespawn(player.Key);
+                playerToRespawn.Add(player.Key);
+            }
+        }
+
+        for (int i = 0; i < playerToRespawn.Count; i++)
+        {
+            _playersDead.Remove(playerToRespawn[i]);
+        }
+    }
     #endregion
 }
 

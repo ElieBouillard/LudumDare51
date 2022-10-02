@@ -57,6 +57,7 @@ MonoBehaviour:
   PlayerDistantFiringController: {fileID: 0}
   _initialHealth: 100
   _healthBar: {fileID: 0}
+  _line: {fileID: 5701985774587268699}
 --- !u!114 &8474493308027158913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +132,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4399759002719680571}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6abed71892b352944b07b80abde0b728, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -296,6 +297,12 @@ PrefabInstance:
 --- !u!4 &5701985774587268697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7499226952518328665, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+    type: 3}
+  m_PrefabInstance: {fileID: 2824635425727524608}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &5701985774587268699 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 7499226952518328667, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
     type: 3}
   m_PrefabInstance: {fileID: 2824635425727524608}
   m_PrefabAsset: {fileID: 0}
