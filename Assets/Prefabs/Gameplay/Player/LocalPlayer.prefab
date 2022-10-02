@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInputAxis: Horizontal
   verticalInputAxis: Vertical
-  jumpKey: 32
+  jumpKey: 0
   useRawInput: 1
 --- !u!114 &3362092204290886289
 MonoBehaviour:
@@ -261,6 +261,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7499226952087097708, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7499226952087097709, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -275,6 +280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499226952518328664, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7499226952518328664, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
         type: 3}
