@@ -228,11 +228,59 @@ public class ClientMessages : MonoBehaviour
         WaveDisplay.Instance.ChangeWave(message.GetInt());
     }
 
-    [MessageHandler((ushort) ServerMessages.MessagesId.RespawnPlayer)]
-    private static void OnServerRespawn(Message message)
+    [MessageHandler((ushort) ServerMessages.MessagesId.PlayerDead)]
+    private static void OnServerClientDead(Message message)
     {
-        PlayerGameIdentity playerGameIdentity = (PlayerGameIdentity) _networkManager.GetLocalPlayer();
-        playerGameIdentity.Revive();
+        ushort id = message.GetUShort();
+
+        if (_networkManager.GetServer().IsRunning)
+        {
+            _networkManager.OnPlayerDead(id);
+        }
+        else
+        {
+            _networkManager.GetPlayersDead().Add(id, 0);
+        }
+
+        if(id != _networkManager.GetLocalPlayer().GetId())
+        {
+            foreach (var player in _networkManager.GetPlayers())
+            {
+                if (player.Key == id)
+                {
+                    PlayerGameIdentity playerIdentity = (PlayerGameIdentity) player.Value;
+                    playerIdentity.DistantEnable(false);
+                }
+            }
+        }
+    }
+
+    [MessageHandler((ushort) ServerMessages.MessagesId.PlayerRespawn)]
+    private static void OnServerClientRespawn(Message message)
+    {
+        ushort id = message.GetUShort();
+
+        if (!_networkManager.GetServer().IsRunning)
+        {
+            _networkManager.GetPlayersDead().Remove(id);
+        }
+
+        if (id == _networkManager.GetLocalPlayer().GetId())
+        {
+            PlayerGameIdentity playerIdentity = (PlayerGameIdentity) _networkManager.GetLocalPlayer();
+            playerIdentity.LocalEnable(true);
+        }
+        else
+        {
+            foreach (var player in _networkManager.GetPlayers())
+            {
+                if (player.Key == id)
+                {
+                    PlayerGameIdentity playerIdentity = (PlayerGameIdentity) player.Value;
+                    playerIdentity.DistantEnable(true);
+                }
+            }
+        }
     }
     #endregion
 }
