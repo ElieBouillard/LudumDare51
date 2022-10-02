@@ -76,7 +76,7 @@ public class PlayerGameIdentity : PlayerIdentity
             HealthBarManager.Instance.SetHealthBarValue((float)_currHealth /(float)_initialHealth);
             
             CameraController.Instance.SetTarget(transform);
-            transform.position = Vector3.zero;
+            transform.position = new Vector3(-1.5f,0,-20f);
         }
         else
         {
