@@ -14,6 +14,7 @@ public class ServerMessages : MonoBehaviour
         ClientShoot,
         ClientShootEnemy,
         SpawnEnemy,
+        EnemyState,
     }
 
     private static NetworkManager _networkManager;
@@ -102,6 +103,17 @@ public class ServerMessages : MonoBehaviour
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.SpawnEnemy);
         message.AddInt(id);
         message.AddInt(spawnIndex);
+        _networkManager.GetServer().SendToAll(message, _networkManager.GetClient().Id);
+    }
+
+    public void SendEnemyState(int id, Vector3 pos, Quaternion rot, bool isRunning, float attack)
+    {
+        Message message = Message.Create(MessageSendMode.unreliable, MessagesId.EnemyState);
+        message.AddInt(id);
+        message.AddVector3(pos);
+        message.AddQuaternion(rot);
+        message.AddBool(isRunning);
+        message.AddFloat(attack);
         _networkManager.GetServer().SendToAll(message, _networkManager.GetClient().Id);
     }
     #endregion

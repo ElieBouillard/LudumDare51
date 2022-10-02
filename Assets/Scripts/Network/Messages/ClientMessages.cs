@@ -193,5 +193,24 @@ public class ClientMessages : MonoBehaviour
         
         EnemySpawnManager.Instance.ServerSpawnEnemy(id, spawnIndex);
     }
+
+    [MessageHandler((ushort)ServerMessages.MessagesId.EnemyState)]
+    private static void OnServerEnemyState(Message message)
+    {
+        int id = message.GetInt();
+        Vector3 pos = message.GetVector3();
+        Quaternion rot = message.GetQuaternion();
+        bool isRunning = message.GetBool();
+        float attack = message.GetFloat();
+
+        foreach (var enemy in EnemySpawnManager.Instance.GetEnemies())
+        {
+            if (enemy.GetId() == id)
+            {
+                enemy.ReceivedState(pos, rot, isRunning, attack);
+                return;
+            }
+        }
+    }
     #endregion
 }
