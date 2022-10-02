@@ -16,7 +16,8 @@ public class ServerMessages : MonoBehaviour
         SpawnEnemy,
         EnemyState,
         ChangeWave,
-        RespawnPlayer,
+        PlayerDead,
+        PlayerRespawn
     }
 
     private static NetworkManager _networkManager;
@@ -127,11 +128,20 @@ public class ServerMessages : MonoBehaviour
         _networkManager.GetServer().SendToAll(message);
     }
 
-    public void SendRespawn(ushort id)
+    private static void SendOnClientDead(ushort id)
     {
-        Message message = Message.Create(MessageSendMode.reliable, MessagesId.RespawnPlayer);
-        _networkManager.GetServer().Send(message, id);
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.PlayerDead);
+        message.AddUShort(id);
+        _networkManager.GetServer().SendToAll(message);
     }
+
+    public void SendOnClientRespawn(ushort id)
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.PlayerRespawn);
+        message.AddUShort(id);
+        _networkManager.GetServer().SendToAll(message);
+    }
+    
     #endregion
 
     #region Received
@@ -181,14 +191,7 @@ public class ServerMessages : MonoBehaviour
     [MessageHandler((ushort) ClientMessages.MessagesId.Dead)]
     private static void OnClientDead(ushort id, Message message)
     {
-        foreach (var player in _networkManager.GetPlayers())
-        {
-            if (player.Key == id)
-            {
-                _networkManager.OnPlayerDead(id);
-                return;
-            }
-        }
+        SendOnClientDead(id);
     }
     #endregion
 }

@@ -24,8 +24,6 @@ public class PlayerGameIdentity : PlayerIdentity
 
     private int _currHealth;
 
-    private bool _isSpectate;
-    
     private void Awake()
     {
         _playerFire = GetComponent<PlayerLocalFiringController>();
@@ -54,52 +52,35 @@ public class PlayerGameIdentity : PlayerIdentity
         
         if (_currHealth <= 0)
         {
-            Death();
+           LocalEnable(false);
         }
     }
 
-    private void Death()
+    public void LocalEnable(bool isRevive)
     {
-        LocalEnable(false);
-    }
-    
-    public void Revive()
-    {
-        LocalEnable(true);
-    }
-    
-    private void LocalEnable(bool value)
-    {
-        if (value)
+        if (isRevive)
         {
+            CameraController.Instance.SetTarget(transform);
+            transform.position = Vector3.zero;
+
             _currHealth = _initialHealth;
             HealthBarManager.Instance.SetHealthBarValue((float)_currHealth /(float)_initialHealth);
-            
-            CameraController.Instance.SetTarget(transform);
-            transform.position = new Vector3(-1.5f,0,-20f);
         }
         else
         {
-            foreach (var player in NetworkManager.Instance.GetPlayers())
-            {
-                if (player.Value.transform.position.y < 500)
-                {
-                    if (player.Key != GetId())
-                    {
-                        CameraController.Instance.SetTarget(player.Value.transform);
-                    }
-                }
-            }
-            
-            transform.position = new Vector3(0, 1000f, 0);
-            
+            CameraController.Instance.SetTarget(null);
+            transform.position = new Vector3(0, 1000, 0);
             NetworkManager.Instance.GetClientMessages().SendOnDead();
         }
-        
-        _isSpectate = !value;
-        _movementController.enabled = value;
+
         _rb.velocity = Vector3.zero;
-        _playerFire.enabled = value;
-        _line.enabled = value;
+        _movementController.enabled = isRevive;
+        _playerFire.enabled = isRevive;
+        _line.enabled = isRevive;
+    }
+
+    public void DistantEnable(bool isRevive)
+    {
+        _line.enabled = isRevive;
     }
 }   

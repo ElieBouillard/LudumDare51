@@ -38,6 +38,7 @@ public class NetworkManager : Singleton<NetworkManager>
     public ClientMessages GetClientMessages() => _clientMessages;
     public ServerMessages GetServerMessages() => _serverMessages;
     public ushort GetMaxPlayer() => _maxPlayer;
+    public Dictionary<ushort, int> GetPlayersDead() => _playersDead;
     #endregion
 
     #region Setters
@@ -208,7 +209,7 @@ public class NetworkManager : Singleton<NetworkManager>
     public void OnServerStartGame()
     {
         _gameState = GameState.Gameplay;
-        SceneManager.LoadScene("Enviro", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
     }
     #endregion
 
@@ -224,14 +225,21 @@ public class NetworkManager : Singleton<NetworkManager>
         }
     }
 
+    [ContextMenu("dd")]
+    public void DebugPlayerDeadCount()
+    {
+        Debug.Log(_playersDead.Count);
+    }
+    
     public void CheckForPlayerRespawn(int waveIndex)
     {
         List<ushort> playerToRespawn = new List<ushort>();
-        foreach (var player     in _playersDead)
+
+        foreach (var player in _playersDead)
         {
-            if (player.Value + 3 == waveIndex)
+            if (player.Value + 1 == waveIndex)
             {
-                _serverMessages.SendRespawn(player.Key);
+                _serverMessages.SendOnClientRespawn(player.Key);
                 playerToRespawn.Add(player.Key);
             }
         }
@@ -241,6 +249,7 @@ public class NetworkManager : Singleton<NetworkManager>
             _playersDead.Remove(playerToRespawn[i]);
         }
     }
+    
     #endregion
 }
 

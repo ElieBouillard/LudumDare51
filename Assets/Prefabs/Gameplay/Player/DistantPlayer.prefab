@@ -51,7 +51,7 @@ MonoBehaviour:
   PlayerAimController: {fileID: 5695169702520511592}
   PlayerDistantFiringController: {fileID: 8411170750763003318}
   _initialHealth: 100
-  _healthBar: {fileID: 0}
+  _line: {fileID: 3378967570377368930}
 --- !u!114 &1515505437935482193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,3 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!120 &3378967570377368930 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 7499226952518328667, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+    type: 3}
+  m_PrefabInstance: {fileID: 5113303237718148153}
+  m_PrefabAsset: {fileID: 0}
