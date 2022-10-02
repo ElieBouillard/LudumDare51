@@ -47,6 +47,12 @@ public class SceneLoader : MonoBehaviour
     {
         EditorSceneManager.OpenScene("Assets/Scenes/GameplayScene.unity", OpenSceneMode.Single);
     }
+    
+    [MenuItem("SceneLoader/Load EnviroScene")]
+    private static void LoadEnviroScene()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/Enviro.unity", OpenSceneMode.Single);
+    }
 #endif
 }
 
