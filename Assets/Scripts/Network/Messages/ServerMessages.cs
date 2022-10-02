@@ -67,7 +67,7 @@ public class ServerMessages : MonoBehaviour
         _networkManager.GetServer().Send(message, id);
     }
 
-    private static void SendClientInputs(ushort id, Vector3 pos, Quaternion rot, float velocityZ, float velocityX, Vector3 aimPos)
+    private static void SendClientInputs(ushort id, Vector3 pos, Quaternion rot, float velocityZ, float velocityX, Vector3 aimPos, bool isSprinting)
     {
         Message message = Message.Create(MessageSendMode.unreliable, MessagesId.PlayerInputs);
         message.AddUShort(id);
@@ -76,6 +76,7 @@ public class ServerMessages : MonoBehaviour
         message.AddFloat(velocityZ);
         message.AddFloat(velocityX);
         message.AddVector3(aimPos);
+        message.AddBool(isSprinting);
         _networkManager.GetServer().SendToAll(message, id);
     }
 
@@ -147,7 +148,7 @@ public class ServerMessages : MonoBehaviour
     [MessageHandler((ushort) ClientMessages.MessagesId.Inputs)]
     private static void OnClientInputs(ushort id, Message message)
     {
-        SendClientInputs(id,message.GetVector3(), message.GetQuaternion(), message.GetFloat(), message.GetFloat(), message.GetVector3());
+        SendClientInputs(id,message.GetVector3(), message.GetQuaternion(), message.GetFloat(), message.GetFloat(), message.GetVector3(), message.GetBool());
     }
 
     [MessageHandler((ushort)ClientMessages.MessagesId.Shoot)]

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+  using UnityEngine.Animations.Rigging;
 
-namespace CMF
+  namespace CMF
 {
 	//Advanced walker controller script;
 	//This controller is used as a basis for other controller types ('SidescrollerController');
@@ -23,6 +22,16 @@ namespace CMF
 
 		//Movement speed;
 		public float movementSpeed = 7f;
+		public float runSpeed = 7f;
+
+		private bool isSpriting;
+
+		[SerializeField] private Animator _animator;
+		[SerializeField] private Rig _rig1;
+		[SerializeField] private Rig _rig2;
+		[SerializeField] private MonoBehaviour _turnToward;
+		[SerializeField] private MonoBehaviour _rotationController;
+		
 
 		//How fast the controller can change direction while in the air;
 		//Higher values result in more air control;
@@ -96,6 +105,27 @@ namespace CMF
 		void Update()
 		{
 			HandleJumpKeyInput();
+
+			
+			if (Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				isSpriting = true;
+				_animator.SetBool("Run", true);
+				_rig1.weight = 0;
+				_rig2.weight = 0;
+				_rotationController.enabled = false;
+				_turnToward.enabled = true;
+			}
+			
+			if (Input.GetKeyUp(KeyCode.LeftShift))
+			{
+				isSpriting = false;
+				_animator.SetBool("Run", false);
+				_rig1.weight = 1;
+				_rig2.weight = 1;
+				_rotationController.enabled = true;
+				_turnToward.enabled = false;
+			}
 		}
 
         //Handle jump booleans for later use in FixedUpdate;
@@ -209,7 +239,7 @@ namespace CMF
 			Vector3 _velocity = CalculateMovementDirection();
 
 			//Multiply (normalized) velocity with movement speed;
-			_velocity *= movementSpeed;
+			_velocity *= isSpriting? runSpeed : movementSpeed;
 
 			return _velocity;
 		}

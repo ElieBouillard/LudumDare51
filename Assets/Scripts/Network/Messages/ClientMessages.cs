@@ -49,7 +49,7 @@ public class ClientMessages : MonoBehaviour
         _networkManager.GetClient().Send(message);
     }
 
-    public void SendInputs(Vector3 pos, Quaternion rot, float velocityZ, float velocityX, Vector3 aimPos) 
+    public void SendInputs(Vector3 pos, Quaternion rot, float velocityZ, float velocityX, Vector3 aimPos, bool isSprinting) 
     {
         Message message = Message.Create(MessageSendMode.unreliable, MessagesId.Inputs);
         message.AddVector3(pos);
@@ -57,6 +57,7 @@ public class ClientMessages : MonoBehaviour
         message.AddFloat(velocityZ);
         message.AddFloat(velocityX);
         message.AddVector3(aimPos);
+        message.AddBool(isSprinting);
         _networkManager.GetClient().Send(message);
     }
 
@@ -132,6 +133,7 @@ public class ClientMessages : MonoBehaviour
         float velocityZ = message.GetFloat();
         float velocityX = message.GetFloat();
         Vector3 aimPos = message.GetVector3();
+        bool isSprinting = message.GetBool();
 
         foreach (var player in _networkManager.GetPlayers())
         {
@@ -140,7 +142,7 @@ public class ClientMessages : MonoBehaviour
             if (player.Key == id)
             {
                 PlayerGameIdentity playerIdentity = (PlayerGameIdentity)player.Value;
-                playerIdentity.PlayerInputReceiver.SetInput(pos, rot, velocityZ, velocityX);
+                playerIdentity.PlayerInputReceiver.SetInput(pos, rot, velocityZ, velocityX, isSprinting);
                 playerIdentity.PlayerAimController.SetTargetPos(aimPos);
             }
         }
