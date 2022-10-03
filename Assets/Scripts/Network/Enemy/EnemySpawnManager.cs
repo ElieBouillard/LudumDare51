@@ -7,7 +7,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 {
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private EnemyGameIdentity enemyPrefab;
-    [SerializeField] private int _spawnCount;
+     private int _spawnCount;
+    [SerializeField] private int _spawnCountPerPlayer;
     [SerializeField] private int _zombieHealth = 100;
 
     private NetworkManager _networkManager;
@@ -27,6 +28,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         base.Awake();
         
         _networkManager = NetworkManager.Instance;
+
+        _spawnCount = NetworkManager.Instance.GetPlayers().Count * _spawnCountPerPlayer;
     }
 
     private void Update()
@@ -51,9 +54,9 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         _currWave++;
         _networkManager.GetServerMessages().SendChangeWave(_currWave);
 
-        if (_currWave % 10 == 0)
+        if (_currWave % 20 == 0)
         {
-            _zombieHealthIncrease += 10;
+            _zombieHealthIncrease += 20;
         }
         
         GameManager.Instance.CheckForPlayerRespawn(_currWave);

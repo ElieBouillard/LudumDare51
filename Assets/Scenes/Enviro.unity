@@ -1715,7 +1715,7 @@ MonoBehaviour:
   - {fileID: 831935979}
   - {fileID: 505002163}
   - {fileID: 55953584}
-  _waveNumberToRespawn: 2
+  _waveNumberToRespawn: 4
   IsGameOver: 0
 --- !u!114 &356390633
 MonoBehaviour:
@@ -1802,7 +1802,7 @@ MonoBehaviour:
   - {fileID: 1920321539}
   enemyPrefab: {fileID: 8638241919986661310, guid: d1cc0a71c8b476142b20a03d3acf6e33,
     type: 3}
-  _spawnCount: 8
+  _spawnCountPerPlayer: 2
   _zombieHealth: 100
 --- !u!1 &395581036
 GameObject:
