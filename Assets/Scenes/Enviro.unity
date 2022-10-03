@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VFX volume
+  m_text: SFX volume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96fc83bf15a1c4c498cf035dbe4dc33f, type: 2}
   m_sharedMaterial: {fileID: 8942870382547068254, guid: 96fc83bf15a1c4c498cf035dbe4dc33f,
@@ -6910,7 +6910,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: 800, y: 10}
+  m_SizeDelta: {x: 200, y: 5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2059244727
 MonoBehaviour:
