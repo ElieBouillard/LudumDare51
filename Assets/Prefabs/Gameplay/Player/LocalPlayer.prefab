@@ -57,13 +57,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5c9cc38c53b74d9a8f5aca862775f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mesh: {fileID: 5221500917028577458}
   PlayerInputReceiver: {fileID: 0}
   PlayerAimController: {fileID: 0}
   PlayerDistantFiringController: {fileID: 0}
   _initialHealth: 100
   _line: {fileID: 5701985774587268699}
   _dieSound: {fileID: 6920211090962216466}
-  _mesh: {fileID: 5221500917028577458}
 --- !u!114 &8474493308027158913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: f19776611390af44780de73191e31eab, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.333
   m_Pitch: 1
   Loop: 0
   Mute: 0
