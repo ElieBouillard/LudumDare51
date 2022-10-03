@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,18 +15,57 @@ namespace CMF
 		//If this is enabled, Unity's internal input smoothing is bypassed;
 		public bool useRawInput = true;
 
-        public override float GetHorizontalMovementInput()
+		public int ControlId;
+		
+		private void Start()
 		{
-			if(useRawInput)
-				return Input.GetAxisRaw(horizontalInputAxis);
+			ControlId = PlayerPrefs.GetInt("Controls");
+		}
+
+		public override float GetHorizontalMovementInput()
+		{
+			if (useRawInput)
+			{
+				float horizontalValue = 0;
+				if (ControlId == 0)
+				{
+					if (Input.GetKey(KeyCode.Q)) horizontalValue = -1;
+					else if (Input.GetKey(KeyCode.D)) horizontalValue = 1;
+					else horizontalValue = 0;
+				}
+				else
+				{
+					if (Input.GetKey(KeyCode.A)) horizontalValue = -1;
+					else if (Input.GetKey(KeyCode.D)) horizontalValue = 1;
+					else horizontalValue = 0;
+				}
+
+				return horizontalValue;
+			}
 			else
 				return Input.GetAxis(horizontalInputAxis);
 		}
 
 		public override float GetVerticalMovementInput()
 		{
-			if(useRawInput)
-				return Input.GetAxisRaw(verticalInputAxis);
+			if (useRawInput)
+			{
+				float verticalValue = 0;
+				if (ControlId == 0)
+				{
+					if (Input.GetKey(KeyCode.Z)) verticalValue = 1;
+					else if (Input.GetKey(KeyCode.S)) verticalValue = -1;
+					else verticalValue = 0;
+				}
+				else
+				{
+					if (Input.GetKey(KeyCode.W)) verticalValue = 1;
+					else if (Input.GetKey(KeyCode.S)) verticalValue = -1;
+					else verticalValue = 0;
+				}
+
+				return verticalValue;
+			}
 			else
 				return Input.GetAxis(verticalInputAxis);
 		}

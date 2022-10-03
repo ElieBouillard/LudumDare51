@@ -26,7 +26,7 @@ public class PlayerLobbyIdentity : PlayerIdentity
         
         if (id == networkManager.GetClient().Id) LobbyManager.Instance.LobbyPanel.EnableStartButton(id == 1);
         
-        _localSprite.SetActive(id == networkManager.GetClient().Id);
+        _localSprite.SetActive(false);
     }
 
     public override void Initialize(ushort id, ulong steamId)
