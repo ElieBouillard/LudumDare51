@@ -63,6 +63,7 @@ MonoBehaviour:
   _initialHealth: 100
   _line: {fileID: 5701985774587268699}
   _dieSound: {fileID: 6920211090962216466}
+  _mesh: {fileID: 5221500917028577458}
 --- !u!114 &8474493308027158913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +865,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83, type: 3}
+--- !u!1 &5221500917028577458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8017922047594483634, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+    type: 3}
+  m_PrefabInstance: {fileID: 2824635425727524608}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5701985774587268697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7499226952518328665, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,

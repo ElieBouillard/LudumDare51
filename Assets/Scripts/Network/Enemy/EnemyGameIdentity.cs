@@ -38,7 +38,7 @@ public class EnemyGameIdentity : MonoBehaviour
     private Quaternion? _targetRot;
 
     private float _attackCouldown;
-    
+
     [SerializeField] private AudioSource _die;
     [SerializeField] private AudioSource _idle;
     

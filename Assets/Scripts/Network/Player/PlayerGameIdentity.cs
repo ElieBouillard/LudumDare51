@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CMF;
 using DG.Tweening;
 using Steamworks;
@@ -26,7 +27,11 @@ public class PlayerGameIdentity : PlayerIdentity
     
     private int _currHealth;
 
-    private bool _isDead; 
+    private bool _isDead;
+
+    [SerializeField] private GameObject _mesh;
+    
+    
     private void Awake()
     {
         _playerFire = GetComponent<PlayerLocalFiringController>();
@@ -43,6 +48,30 @@ public class PlayerGameIdentity : PlayerIdentity
             CameraController.Instance.SetTarget(transform);
         }
 
+        for (int i = 0; i < NetworkManager.Instance.GetPlayers().ToList().Count; i++)
+        {
+            if (NetworkManager.Instance.GetPlayers().Keys.ToList()[i] == GetId())
+            {
+                if (i == 0)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player");
+                }
+                if (i == 1)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player2");
+                }
+                if (i == 2)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player3");
+                }
+                if (i == 3)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player4");
+                }
+                break;
+            }
+        }
+        
         _currHealth = _initialHealth;
     }
 
@@ -50,6 +79,8 @@ public class PlayerGameIdentity : PlayerIdentity
     {
         _currHealth -= damage;
 
+        SplashScreen.Instance.Splash();
+        
         if(IsLocalPlayer())
             HealthBarManager.Instance.SetHealthBarValue((float)_currHealth /(float)_initialHealth);
         
