@@ -235,7 +235,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
         foreach (var player in _playersDead)
         {
-            if (player.Value + 1 == waveIndex)
+            if (player.Value + 3 == waveIndex)
             {
                 _serverMessages.SendOnClientRespawn(player.Key);
                 playerToRespawn.Add(player.Key);

@@ -24,6 +24,7 @@ public class PlayerGameIdentity : PlayerIdentity
 
     private int _currHealth;
 
+    [SerializeField] private bool _isDead; 
     private void Awake()
     {
         _playerFire = GetComponent<PlayerLocalFiringController>();
@@ -77,18 +78,22 @@ public class PlayerGameIdentity : PlayerIdentity
         _movementController.enabled = isRevive;
         _playerFire.enabled = isRevive;
         _line.enabled = isRevive;
+        _isDead = !isRevive;
     }
 
     public void DistantEnable(bool isRevive)
     {
         _line.enabled = isRevive;
+        _isDead = !isRevive;
     }
 
     public void LookForSpectate()
     {
+        if(!_isDead) return;
+        
         foreach (var player in NetworkManager.Instance.GetPlayers())
         {
-            if(player.Key == GetId()) break;
+            if(player.Key == GetId()) continue;
             if (!NetworkManager.Instance.GetPlayersDead().ContainsKey(player.Key))
             {
                 CameraController.Instance.SetTarget(player.Value.transform);
