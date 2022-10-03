@@ -56,6 +56,8 @@ public class PanelManager : Singleton<PanelManager>
             panel.gameObject.SetActive(panel.PanelType == panelType);
         }
 
+        if (_camera == null) return;
+        
         if (panelType == PanelType.MainMenu)
         {
             _camera.transform.DOMove(_camStartMenuPos.position, 2f);
