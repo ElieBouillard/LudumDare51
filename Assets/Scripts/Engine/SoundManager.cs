@@ -41,15 +41,31 @@ public class SoundManager : MonoBehaviour
     {
         _musicVolumeSlider.onValueChanged.AddListener(OnChangeMusicVolumeValue);
         _vfxVolumeSlider.onValueChanged.AddListener(OnChangeVFXVolumeValue);
+
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
+            _audioMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
+            _musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        }
+
+
+        if (PlayerPrefs.HasKey("VfxVolume"))
+        {            
+            _audioMixer.SetFloat("VfxVolume", PlayerPrefs.GetFloat("VfxVolume"));
+            _vfxVolumeSlider.value = PlayerPrefs.GetFloat("VfxVolume");
+        }
+
     }
 
     private void OnChangeMusicVolumeValue(float value)
     {
         _audioMixer.SetFloat("MusicVolume", value);
+        PlayerPrefs.SetFloat("MusicVolume", value);
     }    
     private void OnChangeVFXVolumeValue(float value)
     {
         _audioMixer.SetFloat("VfxVolume", value);
+        PlayerPrefs.SetFloat("VfxVolume", value);
     }
     
 }
