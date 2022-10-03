@@ -1715,7 +1715,7 @@ MonoBehaviour:
   - {fileID: 831935979}
   - {fileID: 505002163}
   - {fileID: 55953584}
-  _waveNumberToRespawn: 0
+  _waveNumberToRespawn: 2
   IsGameOver: 0
 --- !u!114 &356390633
 MonoBehaviour:
