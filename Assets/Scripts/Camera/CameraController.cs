@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CameraShake;
 using UnityEngine;
 
 public class CameraController : Singleton<CameraController>
@@ -8,6 +9,11 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _offSet;
     [SerializeField] private float _smoothForce;
+
+    private void Start()
+    {
+        CameraShaker.Instance.StrengthMultiplier = 1.5f;
+    }
 
     public void SetTarget(Transform target) => _target = target;
     

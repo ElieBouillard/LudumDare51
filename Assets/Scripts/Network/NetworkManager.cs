@@ -209,13 +209,15 @@ public class NetworkManager : Singleton<NetworkManager>
     public void OnServerStartGame()
     {
         _gameState = GameState.Gameplay;
-        SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Enviro", LoadSceneMode.Single);
     }
     #endregion
 
     #region Server
     public void OnPlayerDead(ushort playerId)
     {
+        if (_playersDead.ContainsKey(playerId)) return;
+        
         _playersDead.Add(playerId, EnemySpawnManager.Instance.GetCurrWave());
 
         if (_playersDead.Count == _players.Count)

@@ -12,11 +12,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _localPlayerPrefab;
     [SerializeField] private GameObject _otherPlayerPrefab;
     [SerializeField] private TMP_Text[] _scoreTexts;
-    
+
+    private Dictionary<ushort, int> _scores = new Dictionary<ushort, int>();
     public Transform GetSpawnPoint() => _spawnPoints[0];
 
-    private bool isGameOver;
-    
+    private bool _isGameOver;
+
+    private List<PlayerIdentity> _players = new List<PlayerIdentity>();
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -70,6 +72,10 @@ public class GameManager : Singleton<GameManager>
         if(playerId == networkManager.GetClient().Id) networkManager.SetLocalPlayer(playerIdentityTemp);
 
         networkManager.GetPlayers()[playerId] = playerIdentityTemp;
+        
+        _players.Add(playerIdentityTemp);
+        
+        _scores.Add(playerIdentityTemp.GetId(), 0);
     }
 
     public void RemovePlayerFromGame(ushort playerId)
@@ -98,5 +104,18 @@ public class GameManager : Singleton<GameManager>
         }
             
         networkManager.GetPlayers().Clear();
+    }
+
+    public void AddScore(ushort id)
+    {
+        for (int i = 0; i < _players.Count; i++)
+        {
+            if (_players[i].GetId() == id)
+            {
+                _scores[id]++;
+
+                _scoreTexts[i].text = $"{_players[i].gameObject.name} : {_scores[id]}";
+            }
+        }
     }
 }

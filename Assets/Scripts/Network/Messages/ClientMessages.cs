@@ -239,7 +239,10 @@ public class ClientMessages : MonoBehaviour
         }
         else
         {
-            _networkManager.GetPlayersDead().Add(id, 0);
+            if (!_networkManager.GetPlayersDead().ContainsKey(id))
+            {
+                _networkManager.GetPlayersDead().Add(id, 0);    
+            }
         }
 
         if(id != _networkManager.GetLocalPlayer().GetId())

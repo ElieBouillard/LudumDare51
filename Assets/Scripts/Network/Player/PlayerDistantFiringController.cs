@@ -17,7 +17,11 @@ public class PlayerDistantFiringController : MonoBehaviour
         impactTemp.transform.forward = dir;
         Destroy(impactTemp, 2f);
         
-        ShootFx(pos, dir);
+        GameManager.Instance.AddScore(GetComponent<PlayerIdentity>().GetId());
+        
+        _muzzleFlash.Play();
+        
+        // ShootFx(pos, dir);
         
         foreach (var enemy in EnemySpawnManager.Instance.GetEnemies())
         {
