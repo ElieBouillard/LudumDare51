@@ -152,6 +152,8 @@ public class EnemyGameIdentity : MonoBehaviour
         
         for (int i = 0; i < _players.Count; i++)
         {
+            if (_players[i] == null) continue;
+            
             float currDistance = (_players[i].position - transform.position).magnitude;
             
             if (currDistance < distance)
