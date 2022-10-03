@@ -1,3 +1,4 @@
+using System.Linq;
 using Steamworks;
 using TMPro;
 using UnityEngine;
@@ -10,7 +11,10 @@ public class PlayerLobbyIdentity : PlayerIdentity
     [SerializeField] private GameObject _localSprite;
 
     protected Callback<AvatarImageLoaded_t> ImageLoaded;
+
+    [SerializeField] private GameObject _mesh;
     
+        
     private void Start()
     {
         ImageLoaded = Callback<AvatarImageLoaded_t>.Create(OnPlayerAvatarLoaded);
@@ -27,6 +31,30 @@ public class PlayerLobbyIdentity : PlayerIdentity
         if (id == networkManager.GetClient().Id) LobbyManager.Instance.LobbyPanel.EnableStartButton(id == 1);
         
         _localSprite.SetActive(false);
+        
+        for (int i = 0; i < NetworkManager.Instance.GetPlayers().ToList().Count; i++)
+        {
+            if (NetworkManager.Instance.GetPlayers().Keys.ToList()[i] == GetId())
+            {
+                if (i == 0)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player");
+                }
+                if (i == 1)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player2");
+                }
+                if (i == 2)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player3");
+                }
+                if (i == 3)
+                {
+                    _mesh.layer = LayerMask.NameToLayer("Player4");
+                }
+                break;
+            }
+        }
     }
 
     public override void Initialize(ushort id, ulong steamId)
