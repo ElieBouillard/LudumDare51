@@ -135,6 +135,7 @@ MonoBehaviour:
   _playerPseudoText: {fileID: 5675457187944955451}
   _profileImage: {fileID: 8199751818588200101}
   _localSprite: {fileID: 148043574162916209}
+  _mesh: {fileID: 4901444383130808133}
 --- !u!1 &7114638507414843812
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +538,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83, type: 3}
+--- !u!1 &4901444383130808133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8017922047594483634, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116504332061384951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8445746049406364944 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6806449101412650471, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
