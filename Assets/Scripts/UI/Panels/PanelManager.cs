@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Steamworks;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class PanelManager : Singleton<PanelManager>
 {
     [SerializeField] private Panel[] _panels;
 
+    [SerializeField] private Transform _camera;
+    [SerializeField] private Transform _camStartMenuPos;
+    [SerializeField] private Transform _camLobbyPos;
+    
+    
     private NetworkManager _networkManager;
     private bool _isPause;
     protected override void Awake()
@@ -48,6 +54,18 @@ public class PanelManager : Singleton<PanelManager>
         foreach (var panel in _panels)
         {
             panel.gameObject.SetActive(panel.PanelType == panelType);
+        }
+
+        if (panelType == PanelType.MainMenu)
+        {
+            _camera.transform.DOMove(_camStartMenuPos.position, 2f);
+            _camera.transform.DORotate(_camStartMenuPos.rotation.eulerAngles, 2f);
+        }
+        
+        if (panelType == PanelType.Lobby)
+        {
+            _camera.transform.DOMove(_camLobbyPos.position, 2f);
+            _camera.transform.DORotate(_camLobbyPos.rotation.eulerAngles, 2f);
         }
     }
 }
