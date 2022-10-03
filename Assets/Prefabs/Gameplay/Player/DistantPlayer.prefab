@@ -57,6 +57,7 @@ MonoBehaviour:
   _initialHealth: 100
   _line: {fileID: 3378967570377368930}
   _dieSound: {fileID: 4527415843607439455}
+  _mesh: {fileID: 3004881351069387659}
 --- !u!114 &1515505437935482193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2250,6 +2251,12 @@ Animator:
 --- !u!4 &1766333893393369566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6806449101412650471, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
+    type: 3}
+  m_PrefabInstance: {fileID: 5113303237718148153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3004881351069387659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8017922047594483634, guid: 80ad7d13ac90a1d4e8dfb6cc9eabec83,
     type: 3}
   m_PrefabInstance: {fileID: 5113303237718148153}
   m_PrefabAsset: {fileID: 0}
