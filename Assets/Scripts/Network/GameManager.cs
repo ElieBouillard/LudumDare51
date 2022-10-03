@@ -12,7 +12,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _localPlayerPrefab;
     [SerializeField] private GameObject _otherPlayerPrefab;
     [SerializeField] private TMP_Text[] _scoreTexts;
-    
+
+    private int[] _score = new int[4];
     public Transform GetSpawnPoint() => _spawnPoints[0];
 
     private bool isGameOver;
@@ -98,5 +99,20 @@ public class GameManager : Singleton<GameManager>
         }
             
         networkManager.GetPlayers().Clear();
+    }
+
+    public void AddScore(ushort id)
+    {
+        List<PlayerIdentity> players = NetworkManager.Instance.GetPlayers().Values.ToList();
+
+        for (int i = 0; i < players.ToList().Count; i++)
+        {
+            if (players[i].GetId() == id)
+            {
+                _score[i]++;
+
+                _scoreTexts[i].text = $"{players[i].gameObject.name} : {_score[i]}";
+            }
+        }
     }
 }

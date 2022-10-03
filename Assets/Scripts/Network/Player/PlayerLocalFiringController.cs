@@ -51,6 +51,8 @@ public class PlayerLocalFiringController : MonoBehaviour
         
         enemy.TakeDamage(_damage);
         
+        GameManager.Instance.AddScore(NetworkManager.Instance.GetLocalPlayer().GetId());
+        
         NetworkManager.Instance.GetClientMessages().SendShootEnemy(enemy.GetId(), pos,dir);
     }
 

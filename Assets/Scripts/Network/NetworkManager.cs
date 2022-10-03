@@ -216,6 +216,8 @@ public class NetworkManager : Singleton<NetworkManager>
     #region Server
     public void OnPlayerDead(ushort playerId)
     {
+        if (_playersDead.ContainsKey(playerId)) return;
+        
         _playersDead.Add(playerId, EnemySpawnManager.Instance.GetCurrWave());
 
         if (_playersDead.Count == _players.Count)
