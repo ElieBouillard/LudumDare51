@@ -25,6 +25,8 @@ public class GameOverPanel : Singleton<GameOverPanel>
 
     public void AddScore(ushort id, int score)
     {
+        if (!NetworkManager.Instance.GetPlayers().ContainsKey(id)) return;
+        
         PlayerEndGame playerEndGame = Instantiate(_playerProfileScore, _parent.transform);
         playerEndGame.transform.localPosition = Offset;
         Offset.y -= 150;
