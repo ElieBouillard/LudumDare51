@@ -171,7 +171,7 @@ public class GameManager : Singleton<GameManager>
 
         foreach (var player in _playersDead)
         {
-            if (player.Value + _waveNumberToRespawn == waveIndex)
+            if (player.Value + _waveNumberToRespawn >= waveIndex)
             {
                 playerToRespawn.Add(player.Key);
                 NetworkManager.Instance.GetServerMessages().SendOnClientRespawn(player.Key);
