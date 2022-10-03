@@ -43,6 +43,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     
     private void Spawn()
     {
+        if (GameManager.Instance.IsGameOver) return;
+        
         _currWave++;
         _networkManager.GetServerMessages().SendChangeWave(_currWave);
         

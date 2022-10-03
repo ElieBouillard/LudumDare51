@@ -37,6 +37,11 @@ public class PanelManager : Singleton<PanelManager>
             }
         }
     }
+
+    public void DisablePauseMenu()
+    {
+        _isPause = false;
+    }
     
     public void EnablePanel(PanelType panelType)
     {

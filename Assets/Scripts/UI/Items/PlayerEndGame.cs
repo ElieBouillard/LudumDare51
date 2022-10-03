@@ -28,6 +28,11 @@ public class PlayerEndGame : MonoBehaviour
 
         LoadFriendAvatar(); 
     }
+
+    public void Initialize(string name, int score)
+    {
+        _profilePseudoText.text = $"{name} : {score}";
+    }
     
     public void LoadFriendAvatar()
     {

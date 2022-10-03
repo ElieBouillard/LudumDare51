@@ -209,20 +209,18 @@ public class NetworkManager : Singleton<NetworkManager>
     public void OnServerStartGame()
     {
         _gameState = GameState.Gameplay;
-        SceneManager.LoadScene("Enviro", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
     }
     #endregion
 
     #region Server
     public void OnPlayerDead(ushort playerId)
     {
-        if (_playersDead.ContainsKey(playerId)) return;
-        
         _playersDead.Add(playerId, EnemySpawnManager.Instance.GetCurrWave());
 
-        if (_playersDead.Count == _players.Count)
+        if (_playersDead.Count >= _players.Count)
         {
-            //SendEndGame;
+            _serverMessages.SendGameOver();
         }
     }
     
@@ -237,7 +235,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
         foreach (var player in _playersDead)
         {
-            if (player.Value + 3 == waveIndex)
+            if (player.Value + 2 == waveIndex)
             {
                 _serverMessages.SendOnClientRespawn(player.Key);
                 playerToRespawn.Add(player.Key);

@@ -71,9 +71,11 @@ public class PlayerGameIdentity : PlayerIdentity
         {
             CameraController.Instance.SetTarget(null);
             transform.position = new Vector3(0, 1000, 0);
-            NetworkManager.Instance.GetClientMessages().SendOnDead();
+            
+            if(!_isDead)
+                NetworkManager.Instance.GetClientMessages().SendOnDead();
         }
-
+        
         _rb.velocity = Vector3.zero;
         _movementController.enabled = isRevive;
         _playerFire.enabled = isRevive;

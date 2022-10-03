@@ -17,7 +17,8 @@ public class ServerMessages : MonoBehaviour
         EnemyState,
         ChangeWave,
         PlayerDead,
-        PlayerRespawn
+        PlayerRespawn,
+        GameOver
     }
 
     private static NetworkManager _networkManager;
@@ -141,7 +142,12 @@ public class ServerMessages : MonoBehaviour
         message.AddUShort(id);
         _networkManager.GetServer().SendToAll(message);
     }
-    
+
+    public void SendGameOver()
+    {
+        Message message = Message.Create(MessageSendMode.reliable, MessagesId.GameOver);
+        _networkManager.GetServer().SendToAll(message);
+    }
     #endregion
 
     #region Received

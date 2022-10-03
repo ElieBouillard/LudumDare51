@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     private Dictionary<ushort, int> _scores = new Dictionary<ushort, int>();
     public Transform GetSpawnPoint() => _spawnPoints[0];
 
-    private bool _isGameOver;
+    public bool IsGameOver;
 
     private List<PlayerIdentity> _players = new List<PlayerIdentity>();
     private void OnEnable()
@@ -117,5 +117,37 @@ public class GameManager : Singleton<GameManager>
                 _scoreTexts[i].text = $"{_players[i].gameObject.name} : {_scores[id]}";
             }
         }
+    }
+
+    public void OnGameOver()
+    {
+        IsGameOver = true;
+        
+        GameOverPanel.Instance.EnableGameOverPanel();
+
+        List<int> scoresToSend = new List<int>();
+
+        foreach (var score in _scores)
+        {
+            scoresToSend.Add(score.Value);
+        }
+        
+        scoresToSend.Sort();
+        scoresToSend.Reverse();
+
+        for (int i = 0; i < scoresToSend.Count; i++)
+        {
+            foreach (var score in _scores)
+            {
+                if (scoresToSend[i] == score.Value)
+                {
+                    GameOverPanel.Instance.AddScore(score.Key, score.Value);
+                    _scores.Remove(score.Key);
+                    break;
+                }
+            }
+        }
+        
+        NetworkManager.Instance.GetPlayersDead().Clear();
     }
 }
