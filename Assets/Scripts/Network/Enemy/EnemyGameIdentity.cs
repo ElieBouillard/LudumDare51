@@ -14,6 +14,9 @@ public class EnemyGameIdentity : MonoBehaviour
     [SerializeField] private Image _healthBarImage;
 
     private EnemyHitbox _hitbox;
+
+    [SerializeField] private GameObject _sim;
+    
     
     private NavMeshAgent _agent;
     private Animator _animator;
@@ -191,6 +194,8 @@ public class EnemyGameIdentity : MonoBehaviour
 
         GetComponent<Collider>().enabled = false;
         transform.GetChild(0).transform.gameObject.SetActive(false);
+
+        Instantiate(_sim, transform.position, transform.rotation);
         
         Destroy(gameObject, 2f);
     }

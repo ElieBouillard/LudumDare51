@@ -2659,6 +2659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialHeatlh: 80
   _healthBarImage: {fileID: 4569891275846949791}
+  _sim: {fileID: 2657392443183677832, guid: 917ffdbb906401d4ea560f3c14dd3352, type: 3}
   _die: {fileID: 450512162537817224}
   _idle: {fileID: 0}
 --- !u!195 &7501604328758135367
