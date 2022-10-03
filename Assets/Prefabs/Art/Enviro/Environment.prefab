@@ -3352,7 +3352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572101519}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.140003, y: 2.86, z: -1.1499996}
+  m_LocalPosition: {x: 20.140003, y: 2.93, z: -1.1499996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3370,8 +3370,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.30850938, b: 0.042452812, a: 1}
-  m_Intensity: 3.73
+  m_Color: {r: 1, g: 0.5877756, b: 0.043137252, a: 1}
+  m_Intensity: 8.03
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -12456,6 +12456,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979965868673236336, guid: 73dc4c9f488253645acd06120300930d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4730305992560135102, guid: 73dc4c9f488253645acd06120300930d,
         type: 3}
@@ -23273,6 +23278,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 2979965868673236336, guid: 73dc4c9f488253645acd06120300930d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4730305992560135102, guid: 73dc4c9f488253645acd06120300930d,
         type: 3}
       propertyPath: m_Name
@@ -31098,6 +31108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979965868673236336, guid: 73dc4c9f488253645acd06120300930d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4730305992560135102, guid: 73dc4c9f488253645acd06120300930d,
         type: 3}
@@ -43195,6 +43210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979965868673236336, guid: 73dc4c9f488253645acd06120300930d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4730305992560135102, guid: 73dc4c9f488253645acd06120300930d,
         type: 3}
