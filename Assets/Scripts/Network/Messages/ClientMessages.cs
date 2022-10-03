@@ -292,7 +292,8 @@ public class ClientMessages : MonoBehaviour
     [MessageHandler((ushort)ServerMessages.MessagesId.GameOver)]
     private static void OnServerGameOver(Message message)
     {
-        GameManager.Instance.OnGameOver();
+        int waveIndex = message.GetInt();
+        GameManager.Instance.OnGameOver(waveIndex);
     }
     #endregion
 }

@@ -123,11 +123,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void OnGameOver()
+    public void OnGameOver(int waveIndex)
     {
         IsGameOver = true;
         
-        GameOverPanel.Instance.EnableGameOverPanel();
+        GameOverPanel.Instance.EnableGameOverPanel(waveIndex);
 
         List<int> scoresToSend = new List<int>();
 
@@ -159,7 +159,7 @@ public class GameManager : Singleton<GameManager>
 
         if (_playersDead.Count >= NetworkManager.Instance.GetPlayers().Count)
         {
-            NetworkManager.Instance.GetServerMessages().SendGameOver();
+            NetworkManager.Instance.GetServerMessages().SendGameOver(EnemySpawnManager.Instance.GetCurrWave());
         }
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Steamworks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class GameOverPanel : Singleton<GameOverPanel>
     [SerializeField] private GameObject _parent;
     [SerializeField] private PlayerEndGame _playerProfileScore;
     [SerializeField] private Button _leaveButton;
+    [SerializeField] private TMP_Text _waveText;
 
     private Vector3 Offset = new Vector3(0,150,0);
 
@@ -18,8 +20,9 @@ public class GameOverPanel : Singleton<GameOverPanel>
         _leaveButton.onClick.AddListener(NetworkManager.Instance.Leave);
     }
 
-    public void EnableGameOverPanel()
+    public void EnableGameOverPanel(int waveIndex)
     {
+        _waveText.text = $"Wave : {waveIndex}";
         _parent.SetActive(true);
     }
 

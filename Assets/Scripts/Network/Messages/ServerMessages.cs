@@ -143,9 +143,10 @@ public class ServerMessages : MonoBehaviour
         _networkManager.GetServer().SendToAll(message);
     }
 
-    public void SendGameOver()
+    public void SendGameOver(int waveIndex)
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.GameOver);
+        message.AddInt(waveIndex);
         _networkManager.GetServer().SendToAll(message);
     }
     #endregion
