@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Steamworks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +11,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private GameObject _localPlayerPrefab;
     [SerializeField] private GameObject _otherPlayerPrefab;
-
+    [SerializeField] private TMP_Text[] _scoreTexts;
+    
     public Transform GetSpawnPoint() => _spawnPoints[0];
 
     private bool isGameOver;
@@ -24,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         NetworkManager.Instance.GetClientMessages().SendReady();
