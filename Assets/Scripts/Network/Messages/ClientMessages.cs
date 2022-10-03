@@ -235,13 +235,13 @@ public class ClientMessages : MonoBehaviour
 
         if (_networkManager.GetServer().IsRunning)
         {
-            _networkManager.OnPlayerDead(id);
+            GameManager.Instance.OnPlayerDead(id);
         }
         else
         {
-            if (!_networkManager.GetPlayersDead().ContainsKey(id))
+            if (!GameManager.Instance.GetPlayersDead().ContainsKey(id))
             {
-                _networkManager.GetPlayersDead().Add(id, 0);    
+                GameManager.Instance.GetPlayersDead().Add(id, 0);    
             }
         }
 
@@ -268,7 +268,7 @@ public class ClientMessages : MonoBehaviour
 
         if (!_networkManager.GetServer().IsRunning)
         {
-            _networkManager.GetPlayersDead().Remove(id);
+            GameManager.Instance.GetPlayersDead().Remove(id);
         }
 
         if (id == _networkManager.GetLocalPlayer().GetId())

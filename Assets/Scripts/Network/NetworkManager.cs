@@ -25,7 +25,6 @@ public class NetworkManager : Singleton<NetworkManager>
     private PlayerIdentity  _localPlayer;
     private ClientMessages _clientMessages;
     private ServerMessages _serverMessages;
-    private Dictionary<ushort, int> _playersDead = new Dictionary<ushort, int>();
     #endregion
 
     #region Getters
@@ -38,7 +37,6 @@ public class NetworkManager : Singleton<NetworkManager>
     public ClientMessages GetClientMessages() => _clientMessages;
     public ServerMessages GetServerMessages() => _serverMessages;
     public ushort GetMaxPlayer() => _maxPlayer;
-    public Dictionary<ushort, int> GetPlayersDead() => _playersDead;
     #endregion
 
     #region Setters
@@ -214,40 +212,7 @@ public class NetworkManager : Singleton<NetworkManager>
     #endregion
 
     #region Server
-    public void OnPlayerDead(ushort playerId)
-    {
-        _playersDead.Add(playerId, EnemySpawnManager.Instance.GetCurrWave());
 
-        if (_playersDead.Count >= _players.Count)
-        {
-            _serverMessages.SendGameOver();
-        }
-    }
-    
-    public void DebugPlayerDeadCount()
-    {
-        Debug.Log(_playersDead.Count);
-    }
-    
-    public void CheckForPlayerRespawn(int waveIndex)
-    {
-        List<ushort> playerToRespawn = new List<ushort>();
-
-        foreach (var player in _playersDead)
-        {
-            if (player.Value + 2 == waveIndex)
-            {
-                _serverMessages.SendOnClientRespawn(player.Key);
-                playerToRespawn.Add(player.Key);
-            }
-        }
-
-        for (int i = 0; i < playerToRespawn.Count; i++)
-        {
-            _playersDead.Remove(playerToRespawn[i]);
-        }
-    }
-    
     #endregion
 }
 

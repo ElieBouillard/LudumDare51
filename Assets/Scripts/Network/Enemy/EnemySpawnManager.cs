@@ -48,7 +48,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         _currWave++;
         _networkManager.GetServerMessages().SendChangeWave(_currWave);
         
-        _networkManager.CheckForPlayerRespawn(_currWave);
+        GameManager.Instance.CheckForPlayerRespawn(_currWave);
         
         List<int> _spawnAvaible = new List<int>();
 

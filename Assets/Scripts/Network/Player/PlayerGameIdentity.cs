@@ -96,7 +96,7 @@ public class PlayerGameIdentity : PlayerIdentity
         foreach (var player in NetworkManager.Instance.GetPlayers())
         {
             if(player.Key == GetId()) continue;
-            if (!NetworkManager.Instance.GetPlayersDead().ContainsKey(player.Key))
+            if (!GameManager.Instance.GetPlayersDead().ContainsKey(player.Key))
             {
                 CameraController.Instance.SetTarget(player.Value.transform);
             }

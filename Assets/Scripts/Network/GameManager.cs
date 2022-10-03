@@ -19,6 +19,10 @@ public class GameManager : Singleton<GameManager>
     public bool IsGameOver;
 
     private List<PlayerIdentity> _players = new List<PlayerIdentity>();
+    
+    private Dictionary<ushort, int> _playersDead = new Dictionary<ushort, int>();
+    
+    public Dictionary<ushort, int> GetPlayersDead() => _playersDead;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -147,7 +151,34 @@ public class GameManager : Singleton<GameManager>
                 }
             }
         }
-        
-        NetworkManager.Instance.GetPlayersDead().Clear();
+    }
+    
+    public void OnPlayerDead(ushort playerId)
+    {
+        _playersDead.Add(playerId, EnemySpawnManager.Instance.GetCurrWave());
+
+        if (_playersDead.Count >= NetworkManager.Instance.GetPlayers().Count)
+        {
+            NetworkManager.Instance.GetServerMessages().SendGameOver();
+        }
+    }
+
+    public void CheckForPlayerRespawn(int waveIndex)
+    {
+        List<ushort> playerToRespawn = new List<ushort>();
+
+        foreach (var player in _playersDead)
+        {
+            if (player.Value + 2 == waveIndex)
+            {
+                playerToRespawn.Add(player.Key);
+                NetworkManager.Instance.GetServerMessages().SendOnClientRespawn(player.Key);
+            }
+        }
+
+        for (int i = 0; i < playerToRespawn.Count; i++)
+        {
+            _playersDead.Remove(playerToRespawn[i]);
+        }
     }
 }
