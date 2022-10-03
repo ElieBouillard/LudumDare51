@@ -209,7 +209,7 @@ public class NetworkManager : Singleton<NetworkManager>
     public void OnServerStartGame()
     {
         _gameState = GameState.Gameplay;
-        SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Enviro", LoadSceneMode.Single);
     }
     #endregion
 
