@@ -8,6 +8,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private EnemyGameIdentity enemyPrefab;
     [SerializeField] private int _spawnCount;
+    [SerializeField] private int _waveToAdd;
+
 
     private NetworkManager _networkManager;
     

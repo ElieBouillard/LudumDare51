@@ -1283,6 +1283,7 @@ MonoBehaviour:
   - {fileID: 831935979}
   - {fileID: 505002163}
   - {fileID: 55953584}
+  _waveNumberToRespawn: 6
   IsGameOver: 0
 --- !u!114 &356390633
 MonoBehaviour:
@@ -1342,6 +1343,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 8638241919986661310, guid: d1cc0a71c8b476142b20a03d3acf6e33,
     type: 3}
   _spawnCount: 2
+  _waveToAdd: 0
 --- !u!1 &374572250
 GameObject:
   m_ObjectHideFlags: 0
