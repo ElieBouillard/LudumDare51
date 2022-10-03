@@ -10,7 +10,6 @@ using Vector3 = UnityEngine.Vector3;
 
 public class EnemyGameIdentity : MonoBehaviour
 {
-    [SerializeField] private int _initialHeatlh = 100;
     [SerializeField] private Image _healthBarImage;
 
     private EnemyHitbox _hitbox;
@@ -33,8 +32,12 @@ public class EnemyGameIdentity : MonoBehaviour
 
     public int GetId() => _id;
 
-    public void SetId(int id) => _id = id;
-    
+    public void Initialize(int id, int health)
+    {
+        _id = id;
+        _currHealth = health;
+    }
+
     private float _attackTime;
 
     private Vector3? _targetPos;
@@ -51,8 +54,6 @@ public class EnemyGameIdentity : MonoBehaviour
         
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
-
-        _currHealth = _initialHeatlh;
 
         _hitbox = GetComponentInChildren<EnemyHitbox>();
         

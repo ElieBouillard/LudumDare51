@@ -8,8 +8,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private EnemyGameIdentity enemyPrefab;
     [SerializeField] private int _spawnCount;
-    [SerializeField] private int _waveToAdd;
-
+    [SerializeField] private int _zombieHealth = 100;
 
     private NetworkManager _networkManager;
     
@@ -69,18 +68,18 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
             
             _enemies.Add(enemy);
             
-            enemy.SetId(Random.Range(0,999999999));
+            enemy.Initialize(Random.Range(0,999999999), _zombieHealth);
             
-            _networkManager.GetServerMessages().SendSpawnEnemy(enemy.GetId(), _spawnAvaible[randIndex]);
+            _networkManager.GetServerMessages().SendSpawnEnemy(enemy.GetId(), _spawnAvaible[randIndex], _zombieHealth);
             
             _spawnAvaible.RemoveAt(randIndex);
         }
     }
 
-    public void ServerSpawnEnemy(int id, int spawnIndex)
+    public void ServerSpawnEnemy(int id, int spawnIndex, int health)
     {
         EnemyGameIdentity enemy = Instantiate(enemyPrefab, _spawnPoints[spawnIndex].position, Quaternion.identity);
-        enemy.SetId(id);
+        enemy.Initialize(id, health);
         _enemies.Add(enemy);
     }
 }

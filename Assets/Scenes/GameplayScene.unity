@@ -1343,7 +1343,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 8638241919986661310, guid: d1cc0a71c8b476142b20a03d3acf6e33,
     type: 3}
   _spawnCount: 2
-  _waveToAdd: 0
+  _zombieHealth: 100
 --- !u!1 &374572250
 GameObject:
   m_ObjectHideFlags: 0

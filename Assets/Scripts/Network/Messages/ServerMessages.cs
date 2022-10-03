@@ -103,11 +103,12 @@ public class ServerMessages : MonoBehaviour
         _networkManager.GetServer().SendToAll(message, id);
     }
     
-    public void SendSpawnEnemy(int id, int spawnIndex)
+    public void SendSpawnEnemy(int id, int spawnIndex, int health)
     {
         Message message = Message.Create(MessageSendMode.reliable, MessagesId.SpawnEnemy);
         message.AddInt(id);
         message.AddInt(spawnIndex);
+        message.AddInt(health);
         _networkManager.GetServer().SendToAll(message, _networkManager.GetClient().Id);
     }
 

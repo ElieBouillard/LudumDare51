@@ -199,8 +199,8 @@ public class ClientMessages : MonoBehaviour
     {
         int id = message.GetInt();
         int spawnIndex = message.GetInt();
-        
-        EnemySpawnManager.Instance.ServerSpawnEnemy(id, spawnIndex);
+        int health = message.GetInt();
+        EnemySpawnManager.Instance.ServerSpawnEnemy(id, spawnIndex, health);
     }
 
     [MessageHandler((ushort)ServerMessages.MessagesId.EnemyState)]
