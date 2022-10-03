@@ -43,8 +43,12 @@ public class PlayerLocalFiringController : MonoBehaviour
 
     private void Shoot(EnemyGameIdentity enemy, Vector3 pos, Vector3 dir)
     {
-        ShootFx(pos, dir);
+        // ShootFx(pos, dir);
 
+        CameraShaker.Presets.ShortShake3D();
+        
+        _muzzleFlash.Play();
+        
         GameObject impactTemp = Instantiate(_impactBloodPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;
         Destroy(impactTemp, 2f);
