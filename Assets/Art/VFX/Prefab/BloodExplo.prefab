@@ -9884,6 +9884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ca024bd6bece0449fdac33599b482c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ennemyexploded: {fileID: 0}
   _Fx:
   - _name: Blood
     _psPrefab: {fileID: 5808489399777354739, guid: 9eee19d90790f60489e3a436315f37e0,

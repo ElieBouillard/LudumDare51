@@ -7,6 +7,7 @@ public class FXPlayer_ : MonoBehaviour
 
     private Animator animator;
 
+    public GameObject Ennemyexploded;
     [Header("------------------- Fx -----------------")]
     [SerializeField] private PSSpawnData[] _Fx;
     // Start is called before the first frame update
@@ -42,5 +43,10 @@ public class FXPlayer_ : MonoBehaviour
     void Explode()
     {
         _Fx.PlayFX("Explode");
+    }
+
+    void instanciatemeshExploded()
+    {
+        Instantiate(Ennemyexploded, transform.position, transform.rotation);
     }
 }
