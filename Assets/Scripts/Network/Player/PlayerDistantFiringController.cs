@@ -19,7 +19,9 @@ public class PlayerDistantFiringController : MonoBehaviour
         
         GameManager.Instance.AddScore(GetComponent<PlayerIdentity>().GetId());
         
-        ShootFx(pos, dir);
+        _muzzleFlash.Play();
+        
+        // ShootFx(pos, dir);
         
         foreach (var enemy in EnemySpawnManager.Instance.GetEnemies())
         {
