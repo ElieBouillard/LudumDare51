@@ -1801,7 +1801,7 @@ MonoBehaviour:
   - {fileID: 1920321539}
   enemyPrefab: {fileID: 8638241919986661310, guid: d1cc0a71c8b476142b20a03d3acf6e33,
     type: 3}
-  _spawnCount: 2
+  _spawnCount: 8
 --- !u!1 &395581036
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,7 +5241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
