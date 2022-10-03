@@ -54,9 +54,9 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         _currWave++;
         _networkManager.GetServerMessages().SendChangeWave(_currWave);
 
-        if (_currWave % 20 == 0)
+        if (_currWave % 10 == 0)
         {
-            _zombieHealthIncrease += 20;
+            _zombieHealthIncrease += 10;
         }
         
         GameManager.Instance.CheckForPlayerRespawn(_currWave);
@@ -78,7 +78,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
             
             _enemies.Add(enemy);
             
-            enemy.Initialize(Random.Range(0,999999999), _zombieHealth);
+            enemy.Initialize(Random.Range(0,999999999), _zombieHealth + _zombieHealthIncrease);
             
             _networkManager.GetServerMessages().SendSpawnEnemy(enemy.GetId(), _spawnAvaible[randIndex], _zombieHealth + _zombieHealthIncrease);
             
