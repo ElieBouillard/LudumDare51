@@ -4,6 +4,7 @@ using Steamworks;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 public class PlayerLocalFiringController : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class PlayerLocalFiringController : MonoBehaviour
     [SerializeField] private int _damage;
 
     [SerializeField]private LayerMask _layerMask;
+
+    [SerializeField] private AudioSource[] _shotSources;
+    [SerializeField] private AudioClip[] _shotClips;
+    [SerializeField] private AudioSource _hitmarker;
+
 
     private void Update()
     {
@@ -34,10 +40,14 @@ public class PlayerLocalFiringController : MonoBehaviour
         }
     }
 
+    private int _shotSoundIndex = 0;
+    
     private void Shoot(Vector3 pos, Vector3 dir)
     {
         ShootFx(pos, dir);
 
+        PlayShotSound();
+        
         NetworkManager.Instance.GetClientMessages().SendShoot(pos,dir);
     }
 
@@ -45,7 +55,11 @@ public class PlayerLocalFiringController : MonoBehaviour
     {
         // ShootFx(pos, dir);
 
+        _hitmarker.Play();
+        
         CameraShaker.Presets.ShortShake3D();
+        
+        PlayShotSound();
         
         _muzzleFlash.Play();
         
@@ -60,6 +74,19 @@ public class PlayerLocalFiringController : MonoBehaviour
         NetworkManager.Instance.GetClientMessages().SendShootEnemy(enemy.GetId(), pos,dir);
     }
 
+
+    private void PlayShotSound()
+    {
+        _shotSources[_shotSoundIndex].PlayOneShot(_shotClips[Random.Range(0,3)]);
+        _shotSources[_shotSoundIndex].pitch = Random.Range(0.9f, 1.1f);
+        _shotSoundIndex++;
+        
+        if (_shotSoundIndex > 2)
+        {
+            _shotSoundIndex = 0;
+        }
+    }
+    
     private void ShootFx(Vector3 pos, Vector3 dir)
     {       
         CameraShaker.Presets.ShortShake3D();

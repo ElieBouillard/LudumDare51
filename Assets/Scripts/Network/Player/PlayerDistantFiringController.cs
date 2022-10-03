@@ -10,9 +10,13 @@ public class PlayerDistantFiringController : MonoBehaviour
     [SerializeField] private GameObject _impactBloodPrefab;
     [SerializeField] private int _damage;
     
+    [SerializeField] private AudioSource[] _shotSources;
+    [SerializeField] private AudioClip[] _shotClips;
     
     public void ShootEnemy(int id, Vector3 pos, Vector3 dir)
     {
+        PlayShotSound();
+        
         GameObject impactTemp = Instantiate(_impactBloodPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;
         Destroy(impactTemp, 2f);
@@ -33,11 +37,27 @@ public class PlayerDistantFiringController : MonoBehaviour
         }
     }
 
+    private int _shotSoundIndex = 0;
+    
     public void ShootFx(Vector3 pos,Vector3 dir)
     {
+        PlayShotSound();
+        
         _muzzleFlash.Play();
         GameObject impactTemp = Instantiate(_impactPrefab, pos, Quaternion.identity);
         impactTemp.transform.forward = dir;
         Destroy(impactTemp, 2f);
+    }
+    
+    private void PlayShotSound()
+    {
+        _shotSources[_shotSoundIndex].PlayOneShot(_shotClips[Random.Range(0,3)]);
+        _shotSources[_shotSoundIndex].pitch = Random.Range(0.9f, 1.1f);
+        _shotSoundIndex++;
+        
+        if (_shotSoundIndex > 2)
+        {
+            _shotSoundIndex = 0;
+        }
     }
 }

@@ -19,7 +19,8 @@ namespace CMF
 		
 		private void Start()
 		{
-			ControlId = PlayerPrefs.GetInt("Controls");
+			if(PlayerPrefs.HasKey("Controls"))
+				ControlId = PlayerPrefs.GetInt("Controls");
 		}
 
 		public override float GetHorizontalMovementInput()

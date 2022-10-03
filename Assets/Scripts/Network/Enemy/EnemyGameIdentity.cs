@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using DG.Tweening;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class EnemyGameIdentity : MonoBehaviour
@@ -41,6 +38,10 @@ public class EnemyGameIdentity : MonoBehaviour
     private Quaternion? _targetRot;
 
     private float _attackCouldown;
+    
+    [SerializeField] private AudioSource _die;
+    [SerializeField] private AudioSource _idle;
+    
     private void Awake()
     {
         _networkManager = NetworkManager.Instance;
@@ -71,6 +72,7 @@ public class EnemyGameIdentity : MonoBehaviour
         }
     }
 
+    
     private void Update()
     {
         if (_networkManager.GetServer().IsRunning)
@@ -184,10 +186,14 @@ public class EnemyGameIdentity : MonoBehaviour
 
     private void Death()
     {
+        _die.Play();
         EnemySpawnManager.Instance.GetEnemies().Remove(this);
-        Destroy(gameObject);
-    }
 
+        GetComponent<Collider>().enabled = false;
+        transform.GetChild(0).transform.gameObject.SetActive(false);
+        
+        Destroy(gameObject, 2f);
+    }
     public void ReceivedState(Vector3 pos, Quaternion rot, bool isRunning, float attack)
     {
         _targetPos = pos;

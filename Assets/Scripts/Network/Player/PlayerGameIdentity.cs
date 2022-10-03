@@ -22,9 +22,11 @@ public class PlayerGameIdentity : PlayerIdentity
     private AdvancedWalkerController _movementController;
     private Rigidbody _rb;
 
+    [SerializeField] private AudioSource _dieSound;
+    
     private int _currHealth;
 
-    [SerializeField] private bool _isDead; 
+    private bool _isDead; 
     private void Awake()
     {
         _playerFire = GetComponent<PlayerLocalFiringController>();
@@ -73,6 +75,7 @@ public class PlayerGameIdentity : PlayerIdentity
             transform.position = new Vector3(0, 1000, 0);
             
             if(!_isDead)
+                _dieSound.Play();
                 NetworkManager.Instance.GetClientMessages().SendOnDead();
         }
         
@@ -87,6 +90,8 @@ public class PlayerGameIdentity : PlayerIdentity
     {
         _line.enabled = isRevive;
         _isDead = !isRevive;
+        if(!isRevive)
+            _dieSound.Play();
     }
 
     public void LookForSpectate()
