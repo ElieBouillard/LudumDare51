@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _localPlayerPrefab;
     [SerializeField] private GameObject _otherPlayerPrefab;
     [SerializeField] private TMP_Text[] _scoreTexts;
+    [SerializeField] private int _waveNumberToRespawn;
+    
 
     private Dictionary<ushort, int> _scores = new Dictionary<ushort, int>();
     public Transform GetSpawnPoint() => _spawnPoints[0];
@@ -169,7 +171,7 @@ public class GameManager : Singleton<GameManager>
 
         foreach (var player in _playersDead)
         {
-            if (player.Value + 2 == waveIndex)
+            if (player.Value + _waveNumberToRespawn == waveIndex)
             {
                 playerToRespawn.Add(player.Key);
                 NetworkManager.Instance.GetServerMessages().SendOnClientRespawn(player.Key);
