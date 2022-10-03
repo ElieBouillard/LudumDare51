@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: P1Normal
-    Event: 500
+    Event: 450
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: P2Normal
-    Event: 300
+    Event: 450
     filterSettings:
       RenderQueueType: 0
       LayerMask:
