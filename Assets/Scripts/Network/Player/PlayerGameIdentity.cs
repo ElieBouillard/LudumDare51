@@ -54,20 +54,21 @@ public class PlayerGameIdentity : PlayerIdentity
             {
                 if (i == 0)
                 {
-                    _mesh.layer = LayerMask.GetMask("Player");
+                    _mesh.layer = LayerMask.NameToLayer("Player");
                 }
                 if (i == 1)
                 {
-                    _mesh.layer = LayerMask.GetMask("Player2");
+                    _mesh.layer = LayerMask.NameToLayer("Player2");
                 }
                 if (i == 2)
                 {
-                    _mesh.layer = LayerMask.GetMask("Player3");
+                    _mesh.layer = LayerMask.NameToLayer("Player3");
                 }
                 if (i == 3)
                 {
-                    _mesh.layer = LayerMask.GetMask("Player4");
+                    _mesh.layer = LayerMask.NameToLayer("Player4");
                 }
+                break;
             }
         }
         
