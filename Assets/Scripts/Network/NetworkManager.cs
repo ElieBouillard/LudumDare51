@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using RiptideNetworking;
 using RiptideNetworking.Transports.SteamTransport;
 using RiptideNetworking.Utils;
@@ -13,6 +15,7 @@ public class NetworkManager : Singleton<NetworkManager>
     #region UnityInspector
     [Header("NetworkSettings")] [Space(10)]
     [SerializeField] private bool _useSteam;
+    [SerializeField] private bool _useLocalHost;
     [SerializeField] private ushort _port = 7777;
     [SerializeField] private ushort _maxPlayer = 4;
     #endregion
@@ -180,14 +183,20 @@ public class NetworkManager : Singleton<NetworkManager>
         else
         {
             _server.Start(_port, _maxPlayer);
-            _client.Connect($"127.0.0.1:{_port}");
+            
+            string ipAddress = _useLocalHost ? $"127.0.0.1:{_port}" : $"{GetLocalIPAddress()}:{_port}";
+                
+            _client.Connect(ipAddress);
         }
     }
     
     public void JoinLobby()
     {
         if (_useSteam) return;
-        _client.Connect($"127.0.0.1:{_port}");
+        
+        string ipAddress = _useLocalHost ? $"127.0.0.1:{_port}" : $"{IpAddressInput.Instance.GetIpAddress()}:{_port}";
+                
+        _client.Connect(ipAddress);
     }
     
     public void Leave()
@@ -214,6 +223,19 @@ public class NetworkManager : Singleton<NetworkManager>
     #region Server
 
     #endregion
+    
+    private static string GetLocalIPAddress()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+        throw new Exception("No network adapters with an IPv4 address in the system!");
+    }
 }
 
 public enum GameState

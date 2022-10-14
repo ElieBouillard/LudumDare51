@@ -199,7 +199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistant: 1
-  _useSteam: 1
+  _useSteam: 0
+  _useLocalHost: 0
   _port: 7777
   _maxPlayer: 4
   _gameState: 1
