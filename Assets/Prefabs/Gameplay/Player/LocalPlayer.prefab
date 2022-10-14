@@ -13,15 +13,15 @@ GameObject:
   - component: {fileID: 8474493308027158913}
   - component: {fileID: 2083294518152077246}
   - component: {fileID: 3362092204290886289}
-  - component: {fileID: 1893901260788476182}
-  - component: {fileID: 8853002466213915102}
-  - component: {fileID: 342972357980022960}
   - component: {fileID: 5716350497497301103}
+  - component: {fileID: 342972357980022960}
   - component: {fileID: 1325348352535252201}
   - component: {fileID: 6511858539631643217}
   - component: {fileID: 7892155460431601706}
   - component: {fileID: 1754436434655691996}
   - component: {fileID: 6920211090962216466}
+  - component: {fileID: 1893901260788476182}
+  - component: {fileID: 8853002466213915102}
   m_Layer: 6
   m_Name: LocalPlayer
   m_TagString: Untagged
@@ -132,49 +132,6 @@ MonoBehaviour:
   sensorArrayRayCount: 6
   sensorArrayRowsAreOffset: 0
   raycastArrayPreviewPositions: []
---- !u!136 &1893901260788476182
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4399759002719680571}
-  m_Material: {fileID: 13400000, guid: 6abed71892b352944b07b80abde0b728, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.1, z: 0}
---- !u!54 &8853002466213915102
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4399759002719680571}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &342972357980022960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4399759002719680571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87afac9a86f0bf84384162fc71ce9124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aimTransform: {fileID: 5701985775651007640}
 --- !u!114 &5716350497497301103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +151,8 @@ MonoBehaviour:
   _impactBloodPrefab: {fileID: 8773490005194726063, guid: 208c34201f5b18544ad861cb88a7890e,
     type: 3}
   _damage: 10
+  _fireRate: 0.15
+  _reloadTime: 2
   _layerMask:
     serializedVersion: 2
     m_Bits: 63
@@ -206,6 +165,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ca8361ade5c03614a871fd2e173a79aa, type: 3}
   - {fileID: 8300000, guid: eb937d85d940f70418406b65e8839631, type: 3}
   _hitmarker: {fileID: 1754436434655691996}
+--- !u!114 &342972357980022960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399759002719680571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87afac9a86f0bf84384162fc71ce9124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimTransform: {fileID: 5701985775651007640}
 --- !u!82 &1325348352535252201
 AudioSource:
   m_ObjectHideFlags: 0
@@ -691,6 +663,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &1893901260788476182
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399759002719680571}
+  m_Material: {fileID: 13400000, guid: 6abed71892b352944b07b80abde0b728, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!54 &8853002466213915102
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399759002719680571}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1001 &2824635425727524608
 PrefabInstance:
   m_ObjectHideFlags: 0
