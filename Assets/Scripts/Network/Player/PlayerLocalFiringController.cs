@@ -105,6 +105,11 @@ public class PlayerLocalFiringController : MonoBehaviour
             _ammouCount--;
             _ammoCanvas.SetAmmoCount(_ammouCount);
 
+            if (_ammouCount <= 0)
+            {
+                StartReload();
+            }
+            
             if (_ammouCount == 0)
                 _canFire = false;
         }
