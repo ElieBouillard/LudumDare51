@@ -31,17 +31,17 @@ public class PanelManager : Singleton<PanelManager>
 
     private void Update()
     {
-        if (_networkManager.GetGameState() == GameState.Gameplay)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                foreach (var panel in _panels)
-                {
-                    if (panel.PanelType == PanelType.Pause) panel.gameObject.SetActive(!_isPause);
-                    _isPause = !_isPause;
-                }
-            }
-        }
+        //if (_networkManager.GetGameState() == GameState.Gameplay)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        foreach (var panel in _panels)
+        //        {
+        //            if (panel.PanelType == PanelType.Pause) panel.gameObject.SetActive(!_isPause);
+        //            _isPause = !_isPause;
+        //        }
+        //    }
+        //}
     }
 
     public void DisablePauseMenu()
